@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-#from satellite_tracker import get_satellite_location
+from satellite_tracker import get_ground_track
 
 app = Flask(__name__)
 
@@ -14,8 +14,8 @@ def satellite_tracker():
     if request.method == 'POST':
         user_satellite = request.form.get("satellite", None)
         if user_satellite!=None:
-            location = "This satellite is not yet implemented"
-            return render_template("satellite_tracker.html", response = [user_satellite, location])
+            lat, lon = get_ground_track(user_satellite)
+            return render_template("satellite_tracker.html", response = [user_satellite, lat[0], lon[0]])
 
     return render_template("satellite_tracker.html")
 

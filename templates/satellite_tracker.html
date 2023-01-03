@@ -23,8 +23,10 @@
     <!-- Respond to chosen satellite -->
     <div id="result">
       {% if response is defined %}
-          You have selected: {{ response[0] }} <br>
-          {{ response[1] }}
+          You have selected: {{ response[0] }} <br> <br>
+          Current position:<br>
+          lat = {{ response[1] }} <br>
+          lon = {{ response[2] }}
       {% endif %}
     </div>
 

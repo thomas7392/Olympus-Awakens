@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Satellite Tracker</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+
+    <h1> Satellite tracker </h1>
+    <p> This page will contain a satellite tracker. Choose your satellite: </p>
+
+    <!-- Request satellite in a dropdown menu -->
+    <form id="form1" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+      <select id="mySelect" name="satellite">
+        <option value="iss">ISS</option>
+        <option value="icesat2">ICESAT-2</option>
+      </select>
+      <input type="submit" value="Submit">
+    </form>
+
+    <!-- Respond to chosen satellite -->
+    <div id="result">
+      {% if response is defined %}
+          You have selected: {{ response[0] }} <br>
+          {{ response[1] }}
+      {% endif %}
+    </div>
+
+    {% endblock %}
+  </body>
+</html>

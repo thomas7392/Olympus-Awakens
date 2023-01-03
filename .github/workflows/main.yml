@@ -26,9 +26,8 @@ jobs:
       uses: google-github-actions/deploy-appengine@v0.3.1
       with:
         deliverables: app.yaml
-        version: v1
         project_id: ${{ secrets.PROJECT_ID }}
-        credentials: ${{ secrets.GCP_SA_SECRET}}
+        credentials: ${{ secrets.GCP_SA_KEY}}
 
     - name: Test
       run: curl "${{ steps.deploy.outputs.url }}"

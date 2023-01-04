@@ -48,22 +48,31 @@ def satellite_tracker():
 
         # Request satellite from norad field
         user_satellite = request.form.get("satellite_norad", None)
+
         if user_satellite != None:
 
             # Get ground track in lat/lon
             sat_data = get_ground_track(user_satellite, IS_NORAD = True)
-
+            ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
 
             if sat_data == False:
                 return render_template("satellite_tracker.html", no_sat = True)
             else:
 
-                # # Create map
-                # mymap = Map(identifier="view-side",
-                #         lat=0,
-                #         lng=0,
-                #         markers=[(sat_data['sat_lat'][0], sat_data['sat_lon'][0])])
-                return render_template("satellite_tracker.html" **sat_data)
+                # Create map
+                mymap = Map(identifier="view-side",
+                            lat=0,
+                            lng=0,
+                            zoom = 2,
+                            style = "width:900px; height:450px;",
+                            markers=[{'icon': 'static/images/satellite_icon.png',
+                                    'lat': sat_data['sat_lat'][0],
+                                    'lng':  sat_data['sat_lon'][0]
+                                        }],
+                            polylines=[ground_track]
+                            )
+
+                return render_template("satellite_tracker.html", mymap = mymap, **sat_data)
 
     return render_template("satellite_tracker.html")
 

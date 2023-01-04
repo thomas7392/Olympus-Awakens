@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
     <title>Satellite Tracker</title>
   </head>
+
+
   <body>
     {% extends "template.html" %}
     {% block content %}
@@ -37,7 +40,9 @@
           NORAD ID: {{sat_norad}} <br> <br>
           Current position:<br>
           lat = {{ sat_lat[0] }} <br>
-          lon = {{ sat_lon[0] }}
+          lon = {{ sat_lon[0] }} <br> <br>
+          {{mymap.html}}
+          Some text
       {% endif %}
     </div>
 

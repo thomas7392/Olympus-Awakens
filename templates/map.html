@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Map </title>
+    {{mymap.js}}
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+
+    <h1> Map </h1>
+    <p> This is a map.</p>
+    {{mymap.html}}
+    {% endblock %}
+  </body>
+</html>

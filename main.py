@@ -14,8 +14,17 @@ def satellite_tracker():
     if request.method == 'POST':
         user_satellite = request.form.get("satellite", None)
         if user_satellite!=None:
-            lat, lon = get_ground_track(user_satellite)
-            return render_template("satellite_tracker.html", response = [user_satellite, lat[0], lon[0]])
+            sat_data = get_ground_track(user_satellite)
+            return render_template("satellite_tracker.html", **sat_data)
+
+    # Dropdown menu with NORAD ID
+    if request.method == 'POST':
+        user_satellite = request.form.get("satellite_norad", None)
+        if user_satellite != None:
+            sat_data = get_ground_track(user_satellite, IS_NORAD = True)
+            if sat_data == False:
+                return render_template("satellite_tracker.html", no_sat = True)
+            return render_template("satellite_tracker.html", **sat_data)
 
     return render_template("satellite_tracker.html")
 

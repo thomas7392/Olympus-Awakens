@@ -53,11 +53,13 @@ def satellite_tracker():
 
             # Get ground track in lat/lon
             sat_data = get_ground_track(user_satellite, IS_NORAD = True)
-            ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
+
 
             if sat_data == False:
                 return render_template("satellite_tracker.html", no_sat = True)
             else:
+
+                ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
 
                 # Create map
                 mymap = Map(identifier="view-side",

@@ -4,13 +4,10 @@ from flask_googlemaps import GoogleMaps, Map, icons
 from satellite_tracker import get_ground_track
 
 # Google maps javascript api key
-# AIzaSyDN5LlfrV9meB03p9rggFyAYuBs9ZEPYu8
-
 app = Flask(__name__)
 
 # Configure google maps API
-#app.config['GOOGLEMAPS_KEY'] = "AIzaSyDN5LlfrV9meB03p9rggFyAYuBs9ZEPYu8"
-GoogleMaps(app, key = 'AIzaSyDN5LlfrV9meB03p9rggFyAYuBs9ZEPYu8')
+GoogleMaps(app)
 
 
 @app.route("/")

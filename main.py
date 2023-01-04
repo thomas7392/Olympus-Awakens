@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-from flask_googlemaps import GoogleMaps, Map, icons
+from flask_googlemaps import GoogleMaps, Map
+import time
 
 from satellite_tracker import get_ground_track
 
@@ -7,28 +8,11 @@ from satellite_tracker import get_ground_track
 app = Flask(__name__)
 
 # Configure google maps API
-GoogleMaps(app)
-
+GoogleMaps(app, key="AIzaSyBihjb3EO5c1KkuDDMSWXXjLfCri30FRHc")
 
 @app.route("/")
 def home():
     return render_template("home.html")
-
-@app.route("/map")
-def map():
-    mymap = Map(
-        identifier="gmap",
-        varname="gmap",
-        lat=37.4419,
-        lng=-122.1419,
-        markers={
-            icons.dots.green: [(37.4419, -122.1419), (37.4500, -122.1350)],
-            icons.dots.blue: [(37.4300, -122.1400, "Hello World")],
-        },
-        style="height:400px;width:600px;margin:0;",
-    )
-
-    return render_template("map.html", mymap = mymap)
 
 @app.route("/satellite_tracker", methods = ['GET', 'POST'])
 def satellite_tracker():
@@ -42,13 +26,22 @@ def satellite_tracker():
 
             # Get ground track in lat/lon
             sat_data = get_ground_track(user_satellite)
+            ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
 
             # Create map
             mymap = Map(identifier="view-side",
                         lat=0,
                         lng=0,
-                        markers=[(sat_data['sat_lat'][0], sat_data['sat_lon'][0])])
-            return render_template("satellite_tracker.html", mymap=mymap, **sat_data)
+                        zoom = 2,
+                        style = "width:900px; height:450px;",
+                        markers=[{'icon': 'static/images/satellite_icon.png',
+                                'lat': sat_data['sat_lat'][0],
+                                'lng':  sat_data['sat_lon'][0]
+                                    }],
+                        polylines=[ground_track]
+                        )
+
+            return render_template("satellite_tracker.html", mymap = mymap, **sat_data)
 
     # Field with NORAD ID
     if request.method == 'POST':
@@ -65,12 +58,12 @@ def satellite_tracker():
                 return render_template("satellite_tracker.html", no_sat = True)
             else:
 
-                # Create map
-                mymap = Map(identifier="view-side",
-                        lat=0,
-                        lng=0,
-                        markers=[(sat_data['sat_lat'][0], sat_data['sat_lon'][0])])
-                return render_template("satellite_tracker.html", mymap=mymap, **sat_data)
+                # # Create map
+                # mymap = Map(identifier="view-side",
+                #         lat=0,
+                #         lng=0,
+                #         markers=[(sat_data['sat_lat'][0], sat_data['sat_lon'][0])])
+                return render_template("satellite_tracker.html" **sat_data)
 
     return render_template("satellite_tracker.html")
 

@@ -10,7 +10,8 @@ from skyfield.api import load, EarthSatellite
 
 
 SATELLITE_TO_NORAD = dict(icesat2 = 43613,
-                          iss = 25544)
+                          iss = 25544,
+                          hubble = 20580)
 
 
 def query_tle(satellite, IS_NORAD = False):
@@ -39,6 +40,15 @@ def get_ground_track(satellite, IS_NORAD = False):
     # Get tle lines
     TLE_lines = query_tle(satellite, IS_NORAD = IS_NORAD)
 
+    # Catch false NORADS
+    if TLE_lines[0] == 'No GP data found':
+        return False
+    elif len(TLE_lines) != 3:
+        return False
+
+    satellite_norad = TLE_lines[1].split(" ")[1][:-1]
+    satellite_name = TLE_lines[0]
+
     # Create skyfield satellite object and load skyfield times
     sat = EarthSatellite(TLE_lines[1], TLE_lines[2])
     ts = load.timescale(builtin=True)
@@ -55,4 +65,9 @@ def get_ground_track(satellite, IS_NORAD = False):
     lon = subsat.longitude.degrees
     lat = subsat.latitude.degrees
 
-    return lat, lon
+    sat_data = dict(sat_name = satellite_name,
+                    sat_norad = satellite_norad,
+                    sat_lat = lat,
+                    sat_lon = lon)
+
+    return sat_data

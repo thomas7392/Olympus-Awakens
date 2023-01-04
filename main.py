@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_googlemaps import GoogleMaps, Map
 import time
 
-from satellite_tracker import get_ground_track
+from satellite_tracker import get_ground_track, get_current_satellite_position
 
 # Google maps javascript api key
 app = Flask(__name__)
@@ -14,6 +14,13 @@ GoogleMaps(app, key="AIzaSyBihjb3EO5c1KkuDDMSWXXjLfCri30FRHc")
 def home():
     return render_template("home.html")
 
+@app.route("/update-satellite-position")
+def update_satellite_position():
+
+    latitude, longitude = get_current_satellite_position(NORAD)
+
+    return jsonify({"latitude": latitude, "longitude": longitude})
+
 @app.route("/satellite_tracker", methods = ['GET', 'POST'])
 def satellite_tracker():
 
@@ -21,12 +28,17 @@ def satellite_tracker():
     if request.method == 'POST':
 
         # Request satellite from dropdown
+        global user_satellite
         user_satellite = request.form.get("satellite", None)
+
         if user_satellite!=None:
 
             # Get ground track in lat/lon
             sat_data = get_ground_track(user_satellite)
             ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
+
+            global NORAD
+            NORAD = sat_data['sat_norad']
 
             # Create map
             mymap = Map(identifier="view-side",
@@ -41,6 +53,7 @@ def satellite_tracker():
                         polylines=[ground_track]
                         )
 
+            print("Hello, world!")
             return render_template("satellite_tracker.html", mymap = mymap, **sat_data)
 
     # Field with NORAD ID
@@ -54,6 +67,7 @@ def satellite_tracker():
             # Get ground track in lat/lon
             sat_data = get_ground_track(user_satellite, IS_NORAD = True)
 
+            NORAD = sat_data['sat_norad']
 
             if sat_data == False:
                 return render_template("satellite_tracker.html", no_sat = True)

@@ -4,6 +4,21 @@
   <head>
     <meta charset="utf-8">
     <title>Satellite Tracker</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function startTracking() {
+        // Set up a timer to make an AJAX request every 10 seconds
+        setInterval(updateMarker, 3000);
+      }
+
+      function updateMarker() {
+          // Make an AJAX request to your Flask app to get the updated satellite position
+        $.get("/update-satellite-position", function(data) {
+          // Update the marker's position on the map using the Google Maps JavaScript API
+          map_markers[0].setPosition(new google.maps.LatLng(data.latitude, data.longitude));
+        });
+      }
+    </script>
   </head>
 
 
@@ -54,6 +69,13 @@
           This NORAD ID is not valid or the satellite could not be found.
       {% endif %}
     </div>
+
+    {% if sat_name is defined %}
+    <script>
+      // Call the startTracking function after the map has been created
+      startTracking();
+    </script>
+    {% endif %}
 
     {% endblock %}
   </body>

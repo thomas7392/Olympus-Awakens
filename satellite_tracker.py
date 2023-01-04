@@ -71,3 +71,22 @@ def get_ground_track(satellite, IS_NORAD = False):
                     sat_lon = lon)
 
     return sat_data
+
+def get_current_satellite_position(NORAD):
+
+    # Get TLE
+    TLE_lines = query_tle(NORAD, IS_NORAD = True)
+
+    # Get time to calculate lat/lon
+    sat = EarthSatellite(TLE_lines[1], TLE_lines[2])
+    ts = load.timescale(builtin=True)
+    base = datetime.datetime.now(pytz.utc)
+    time = ts.from_datetime(base)
+
+    # Calculate lat/lon
+    geocentric = sat.at(time)
+    subsat = geocentric.subpoint()
+    lon = subsat.longitude.degrees
+    lat = subsat.latitude.degrees
+
+    return lat, lon

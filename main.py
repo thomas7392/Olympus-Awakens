@@ -18,7 +18,6 @@ def home():
 def update_satellite_position():
 
     latitude, longitude = get_current_satellite_position(NORAD)
-
     return jsonify({"latitude": latitude, "longitude": longitude})
 
 @app.route("/satellite_tracker", methods = ['GET', 'POST'])
@@ -67,12 +66,12 @@ def satellite_tracker():
             # Get ground track in lat/lon
             sat_data = get_ground_track(user_satellite, IS_NORAD = True)
 
-            NORAD = sat_data['sat_norad']
-
+            # Check if NORAD ID was found
             if sat_data == False:
                 return render_template("satellite_tracker.html", no_sat = True)
-            else:
 
+            else:
+                NORAD = sat_data['sat_norad']
                 ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
 
                 # Create map

@@ -12,7 +12,7 @@
     {% block content %}
 
     <h1> Satellite tracker </h1>
-    <p> This page will contain a satellite tracker. Choose your satellite: </p>
+    <p> Choose your satellite: </p>
 
     <!-- Request satellite in a dropdown menu -->
     <form id="form1" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
@@ -38,11 +38,13 @@
       {% if sat_name is defined %}
           You have selected: {{ sat_name }} <br>
           NORAD ID: {{sat_norad}} <br> <br>
+
+          {{mymap.html}}
+          {{mymap.js}}
+
           Current position:<br>
           lat = {{ sat_lat[0] }} <br>
           lon = {{ sat_lon[0] }} <br> <br>
-          {{mymap.html}}
-          Some text
       {% endif %}
     </div>
 

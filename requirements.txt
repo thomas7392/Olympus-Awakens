@@ -3,4 +3,4 @@ Werkzeug
 datetime
 pytz
 skyfield
-flask-googlemaps
+git+https://github.com/flask-extensions/Flask-GoogleMaps

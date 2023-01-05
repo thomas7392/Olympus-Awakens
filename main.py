@@ -1,14 +1,26 @@
 from flask import Flask, render_template, request, jsonify
 from flask_googlemaps import GoogleMaps, Map
 import time
+import os.path
 
 from satellite_tracker import get_ground_track, get_current_satellite_position
 
 # Google maps javascript api key
 app = Flask(__name__)
 
-# Configure google maps API
-GoogleMaps(app, key="AIzaSyBihjb3EO5c1KkuDDMSWXXjLfCri30FRHc")
+# Choose correct google maps API key
+if os.path.isfile("api_secrets.py"):
+
+    # If developing locally, choose the dev key
+    from api_secrets import MAPS_DEV_API_KEY
+    maps_api_key = MAPS_DEV_API_KEY
+
+else:
+
+    # If local key not present, choose the restricted production key
+    maps_api_key = "AIzaSyBihjb3EO5c1KkuDDMSWXXjLfCri30FRHc"
+
+GoogleMaps(app, key=maps_api_key)
 
 @app.route("/")
 def home():
@@ -17,7 +29,7 @@ def home():
 @app.route("/update-satellite-position")
 def update_satellite_position():
 
-    latitude, longitude = get_current_satellite_position(NORAD)
+    latitude, longitude = get_current_satellite_position(TLE_lines)
     return jsonify({"latitude": latitude, "longitude": longitude})
 
 @app.route("/satellite_tracker", methods = ['GET', 'POST'])
@@ -27,7 +39,6 @@ def satellite_tracker():
     if request.method == 'POST':
 
         # Request satellite from dropdown
-        global user_satellite
         user_satellite = request.form.get("satellite", None)
 
         if user_satellite!=None:
@@ -36,8 +47,9 @@ def satellite_tracker():
             sat_data = get_ground_track(user_satellite)
             ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
 
-            global NORAD
-            NORAD = sat_data['sat_norad']
+            # Save the TLE_lines globally, to calculate future positions dynamically
+            global TLE_lines
+            TLE_lines = sat_data['sat_tle_lines']
 
             # Create map
             mymap = Map(identifier="view-side",
@@ -52,7 +64,6 @@ def satellite_tracker():
                         polylines=[ground_track]
                         )
 
-            print("Hello, world!")
             return render_template("satellite_tracker.html", mymap = mymap, **sat_data)
 
     # Field with NORAD ID
@@ -71,8 +82,10 @@ def satellite_tracker():
                 return render_template("satellite_tracker.html", no_sat = True)
 
             else:
-                NORAD = sat_data['sat_norad']
                 ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
+
+                # Save the TLE_lines globally, to calculate future positions dynamically
+                TLE_lines = sat_data['sat_tle_lines']
 
                 # Create map
                 mymap = Map(identifier="view-side",

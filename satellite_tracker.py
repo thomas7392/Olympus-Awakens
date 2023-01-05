@@ -68,14 +68,12 @@ def get_ground_track(satellite, IS_NORAD = False):
     sat_data = dict(sat_name = satellite_name,
                     sat_norad = satellite_norad,
                     sat_lat = lat,
-                    sat_lon = lon)
+                    sat_lon = lon,
+                    sat_tle_lines = TLE_lines)
 
     return sat_data
 
-def get_current_satellite_position(NORAD):
-
-    # Get TLE
-    TLE_lines = query_tle(NORAD, IS_NORAD = True)
+def get_current_satellite_position(TLE_lines):
 
     # Get time to calculate lat/lon
     sat = EarthSatellite(TLE_lines[1], TLE_lines[2])

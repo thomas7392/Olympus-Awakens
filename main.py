@@ -8,19 +8,20 @@ from satellite_tracker import get_ground_track, get_current_satellite_position
 # Google maps javascript api key
 app = Flask(__name__)
 
-# Choose correct google maps API key
-if os.path.isfile("api_secrets.py"):
+# # Choose correct google maps API key
+# if os.path.isfile("api_secrets.py"):
 
-    # If developing locally, choose the dev key
-    from api_secrets import MAPS_DEV_API_KEY
-    maps_api_key = MAPS_DEV_API_KEY
+#     # If developing locally, choose the dev key
+#     from api_secrets import MAPS_DEV_API_KEY
+#     maps_api_key = MAPS_DEV_API_KEY
 
-else:
+# else:
 
-    # If local key not present, choose the restricted production key
-    maps_api_key = "AIzaSyBihjb3EO5c1KkuDDMSWXXjLfCri30FRHc"
+#     # If local key not present, choose the restricted production key
+#     maps_api_key = "AIzaSyBihjb3EO5c1KkuDDMSWXXjLfCri30FRHc"
 
-GoogleMaps(app, key=maps_api_key)
+#GoogleMaps(app, key=maps_api_key)
+GoogleMaps(app)
 
 @app.route("/")
 def home():

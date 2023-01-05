@@ -32,6 +32,7 @@ html {
   position:relative;
   padding:0px;
   height: 100%;
+  width: 100%;
 }
 
 .header{
@@ -97,14 +98,8 @@ div.content {
     height: auto;
     position: relative;
   }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
+  .sidebar a {text-align: center;
+    float: none;}
 
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
+  div.content {margin-left: 0; width: 100%; float: none;}
 }

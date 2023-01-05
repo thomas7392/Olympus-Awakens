@@ -6,6 +6,7 @@
     <title>Satellite Tracker</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
       function startTracking() {
         // Set up a timer to make an AJAX request every 3 seconds
         setInterval(updateMarker, 3000);
@@ -16,6 +17,11 @@
         $.get("/update-satellite-position", function(data) {
           // Update the marker's position on the map using the Google Maps JavaScript API
           map_markers[0].setPosition(new google.maps.LatLng(data.latitude, data.longitude));
+          var lat = document.getElementById('lat');
+          var lon = document.getElementById('lon');
+
+          lat.innerHTML = data.latitude.toFixed(4)
+          lon.innerHTML = data.longitude.toFixed(4)
         });
       }
     </script>
@@ -23,59 +29,61 @@
 
 
   <body>
+
     {% extends "template.html" %}
     {% block content %}
+      <h1> Satellite tracker </h1>
+      <p> Choose your satellite: </p>
 
-    <h1> Satellite tracker </h1>
-    <p> Choose your satellite: </p>
+      <div class="choose_satellite">
+        <!-- Request satellite in a dropdown menu -->
+        <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+          <label for="satellite">Example satellites: </label>
+          <select id="mySelect" name="satellite">
+            <option value="iss">ISS</option>
+            <option value="icesat2">ICESAT-2</option>
+            <option value="hubble">Hubble</option>
+          </select>
+          <input type="submit" value="Submit">
+        </form>
 
-    <!-- Request satellite in a dropdown menu -->
-    <form id="form1" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
-      <label for="satellite">Example satellites: </label>
-      <select id="mySelect" name="satellite">
-        <option value="iss">ISS</option>
-        <option value="icesat2">ICESAT-2</option>
-        <option value="hubble">Hubble</option>
-      </select>
-      <input type="submit" value="Submit">
-    </form>
+        <!-- Request satellite in an open field -->
+        <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+          <label for="satellite_norad">Satellite NORAD ID: </label>
+          <input type="text" id="form2" name="satellite_norad">
+          <input type="submit" value="submit">
+        </form>
+      </div>
+      <br>
 
-    <form id="form2" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
-      <label for="satellite_norad">Satellite NORAD ID: </label>
-      <input type="text" id="form2" name="satellite_norad">
-      <input type="submit" value="submit">
-    </form>
+      <!-- Respond to chosen satellite -->
+        {% if sat_name is defined %}
+          <div class="tracker_info">
+            You have selected: {{ sat_name }} <br>
+            NORAD ID: {{sat_norad}} <br> <br>
+            Current position:<br>
+            lat = <span id = "lat">{{sat_first_lat}}</span><br>
+            lon = <span id = "lon">{{sat_first_lon}}</span>
+          </div>
 
-    <br>
+          <br><br>
 
-    <!-- Respond to chosen satellite -->
-    <div id="result">
-      {% if sat_name is defined %}
-          You have selected: {{ sat_name }} <br>
-          NORAD ID: {{sat_norad}} <br> <br>
+          <div class="tracker_map">
+            {{mymap.html}}
+            {{mymap.js}}
+          </div>
+          <script>
+            // Call the startTracking function after the map has been created
+            startTracking();
+          </script>
+        {% endif %}
 
-          {{mymap.html}}
-          {{mymap.js}}
-
-          Current position:<br>
-          lat = {{ sat_lat[0] }} <br>
-          lon = {{ sat_lon[0] }} <br> <br>
-      {% endif %}
-    </div>
-
-    <!-- Respond if satellite not found -->
-    <div id="result">
-      {% if no_sat is defined %}
-          This NORAD ID is not valid or the satellite could not be found.
-      {% endif %}
-    </div>
-
-    {% if sat_name is defined %}
-    <script>
-      // Call the startTracking function after the map has been created
-      startTracking();
-    </script>
-    {% endif %}
+      <!-- Respond if satellite not found -->
+      <div>
+        {% if no_sat is defined %}
+            This NORAD ID is not valid or the satellite could not be found.
+        {% endif %}
+      </div>
 
     {% endblock %}
   </body>

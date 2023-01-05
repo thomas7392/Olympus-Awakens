@@ -1,5 +1,6 @@
 # General imports
 from urllib.request import urlopen
+import numpy as np
 
 # Time imports
 import datetime
@@ -37,6 +38,7 @@ def get_ground_track(satellite, IS_NORAD = False):
     '''
     Return an ephemeris of requested satellite in lat/lon for a ground track
     '''
+
     # Get tle lines
     TLE_lines = query_tle(satellite, IS_NORAD = IS_NORAD)
 
@@ -68,14 +70,14 @@ def get_ground_track(satellite, IS_NORAD = False):
     sat_data = dict(sat_name = satellite_name,
                     sat_norad = satellite_norad,
                     sat_lat = lat,
-                    sat_lon = lon)
-
+                    sat_lon = lon,
+                    sat_tle_lines = TLE_lines,
+                    sat_first_lat = np.round(lat[0], 4),
+                    sat_first_lon = np.round(lon[0], 4)
+                    )
     return sat_data
 
-def get_current_satellite_position(NORAD):
-
-    # Get TLE
-    TLE_lines = query_tle(NORAD, IS_NORAD = True)
+def get_current_satellite_position(TLE_lines):
 
     # Get time to calculate lat/lon
     sat = EarthSatellite(TLE_lines[1], TLE_lines[2])

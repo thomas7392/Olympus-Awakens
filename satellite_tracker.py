@@ -37,6 +37,7 @@ def get_ground_track(satellite, IS_NORAD = False):
     '''
     Return an ephemeris of requested satellite in lat/lon for a ground track
     '''
+
     # Get tle lines
     TLE_lines = query_tle(satellite, IS_NORAD = IS_NORAD)
 

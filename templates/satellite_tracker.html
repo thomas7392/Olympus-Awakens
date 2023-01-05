@@ -23,60 +23,59 @@
 
 
   <body>
+
     {% extends "template.html" %}
     {% block content %}
+      <h1> Satellite tracker </h1>
+      <p> Choose your satellite: </p>
 
-    <h1> Satellite tracker </h1>
-    <p> Choose your satellite: </p>
+      <!-- Request satellite in a dropdown menu -->
+      <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+        <label for="satellite">Example satellites: </label>
+        <select id="mySelect" name="satellite">
+          <option value="iss">ISS</option>
+          <option value="icesat2">ICESAT-2</option>
+          <option value="hubble">Hubble</option>
+        </select>
+        <input type="submit" value="Submit">
+      </form>
 
-    <!-- Request satellite in a dropdown menu -->
-    <form id="form1" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
-      <label for="satellite">Example satellites: </label>
-      <select id="mySelect" name="satellite">
-        <option value="iss">ISS</option>
-        <option value="icesat2">ICESAT-2</option>
-        <option value="hubble">Hubble</option>
-      </select>
-      <input type="submit" value="Submit">
-    </form>
+      <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+        <label for="satellite_norad">Satellite NORAD ID: </label>
+        <input type="text" id="form2" name="satellite_norad">
+        <input type="submit" value="submit">
+      </form>
 
-    <form id="form2" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
-      <label for="satellite_norad">Satellite NORAD ID: </label>
-      <input type="text" id="form2" name="satellite_norad">
-      <input type="submit" value="submit">
-    </form>
+      <br>
 
-    <br>
+      <!-- Respond to chosen satellite -->
+      <div>
+        {% if sat_name is defined %}
+            You have selected: {{ sat_name }} <br>
+            NORAD ID: {{sat_norad}} <br> <br>
 
-    <!-- Respond to chosen satellite -->
-    <div id="result">
+            {{mymap.html}}
+            {{mymap.js}}
+
+            Current position:<br>
+            lat = {{ sat_lat[0] }} <br>
+            lon = {{ sat_lon[0] }} <br> <br>
+        {% endif %}
+      </div>
+
+      <!-- Respond if satellite not found -->
+      <div>
+        {% if no_sat is defined %}
+            This NORAD ID is not valid or the satellite could not be found.
+        {% endif %}
+      </div>
+
       {% if sat_name is defined %}
-          You have selected: {{ sat_name }} <br>
-          NORAD ID: {{sat_norad}} <br> <br>
-
-          {{mymap.html}}
-          {{mymap.js}}
-
-          Current position:<br>
-          lat = {{ sat_lat[0] }} <br>
-          lon = {{ sat_lon[0] }} <br> <br>
+      <script>
+        // Call the startTracking function after the map has been created
+        startTracking();
+      </script>
       {% endif %}
-    </div>
-
-    <!-- Respond if satellite not found -->
-    <div id="result">
-      {% if no_sat is defined %}
-          This NORAD ID is not valid or the satellite could not be found.
-      {% endif %}
-    </div>
-
-    {% if sat_name is defined %}
-    <script>
-      // Call the startTracking function after the map has been created
-      startTracking();
-    </script>
-    {% endif %}
-
     {% endblock %}
   </body>
 </html>

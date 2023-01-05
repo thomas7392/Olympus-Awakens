@@ -38,69 +38,45 @@ def satellite_tracker():
     # Dropdown menu with example satellites
     if request.method == 'POST':
 
-        # Request satellite from dropdown
+        # Get satellite from dropdown or open norad field
         user_satellite = request.form.get("satellite", None)
+        user_satellite_norad = request.form.get("satellite_norad", None)
 
+        # Get ground track if satellite is from examples
         if user_satellite!=None:
 
             # Get ground track in lat/lon
             sat_data = get_ground_track(user_satellite)
-            ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
 
-            # Save the TLE_lines globally, to calculate future positions dynamically
-            global TLE_lines
-            TLE_lines = sat_data['sat_tle_lines']
+        # Get ground track if satellite is from NORAD
+        if user_satellite_norad!=None:
 
-            # Create map
-            mymap = Map(identifier="view-side",
-                        lat=0,
-                        lng=0,
-                        zoom = 2,
-                        style = "width:900px; height:450px;",
-                        markers=[{'icon': 'static/images/satellite_icon.png',
-                                'lat': sat_data['sat_lat'][0],
-                                'lng':  sat_data['sat_lon'][0]
-                                    }],
-                        polylines=[ground_track]
-                        )
-
-            return render_template("satellite_tracker.html", mymap = mymap, **sat_data)
-
-    # Field with NORAD ID
-    if request.method == 'POST':
-
-        # Request satellite from norad field
-        user_satellite = request.form.get("satellite_norad", None)
-
-        if user_satellite != None:
-
-            # Get ground track in lat/lon
-            sat_data = get_ground_track(user_satellite, IS_NORAD = True)
-
+            # Request satellite from norad field
+            sat_data = get_ground_track(user_satellite_norad, IS_NORAD = True)
             # Check if NORAD ID was found
             if sat_data == False:
                 return render_template("satellite_tracker.html", no_sat = True)
 
-            else:
-                ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
+        ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
 
-                # Save the TLE_lines globally, to calculate future positions dynamically
-                TLE_lines = sat_data['sat_tle_lines']
+        # Save the TLE_lines globally, to calculate future positions dynamically without additional query
+        global TLE_lines
+        TLE_lines = sat_data['sat_tle_lines']
 
-                # Create map
-                mymap = Map(identifier="view-side",
-                            lat=0,
-                            lng=0,
-                            zoom = 2,
-                            style = "width:900px; height:450px;",
-                            markers=[{'icon': 'static/images/satellite_icon.png',
-                                    'lat': sat_data['sat_lat'][0],
-                                    'lng':  sat_data['sat_lon'][0]
-                                        }],
-                            polylines=[ground_track]
-                            )
+        # Create map
+        mymap = Map(identifier="view-side",
+                    lat=0,
+                    lng=0,
+                    zoom = 2,
+                    style = "width:900px; height:450px;",
+                    markers=[{'icon': 'static/images/satellite_icon.png',
+                            'lat': sat_data['sat_lat'][0],
+                            'lng':  sat_data['sat_lon'][0]
+                                }],
+                    polylines=[ground_track]
+                    )
 
-                return render_template("satellite_tracker.html", mymap = mymap, **sat_data)
+        return render_template("satellite_tracker.html", mymap = mymap, **sat_data)
 
     return render_template("satellite_tracker.html")
 

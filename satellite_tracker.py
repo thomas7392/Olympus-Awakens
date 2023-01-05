@@ -1,5 +1,6 @@
 # General imports
 from urllib.request import urlopen
+import numpy as np
 
 # Time imports
 import datetime
@@ -70,8 +71,10 @@ def get_ground_track(satellite, IS_NORAD = False):
                     sat_norad = satellite_norad,
                     sat_lat = lat,
                     sat_lon = lon,
-                    sat_tle_lines = TLE_lines)
-
+                    sat_tle_lines = TLE_lines,
+                    sat_first_lat = np.round(lat[0], 4),
+                    sat_first_lon = np.round(lon[0], 4)
+                    )
     return sat_data
 
 def get_current_satellite_position(TLE_lines):

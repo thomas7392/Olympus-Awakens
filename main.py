@@ -68,7 +68,7 @@ def satellite_tracker():
                     lat=0,
                     lng=0,
                     zoom = 2,
-                    style = "width:900px; height:450px;",
+                    style = "width:100%; height:100%;",
                     markers=[{'icon': 'static/images/satellite_icon.png',
                             'lat': sat_data['sat_lat'][0],
                             'lng':  sat_data['sat_lon'][0]

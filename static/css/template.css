@@ -8,6 +8,26 @@ html {
   height: 100%;
 }
 
+.narrow{
+  width: 50px;
+}
+
+.tracker_info{
+  padding: 0px;
+  background-color: antiquewhite;
+  width: 900px;
+}
+
+.tracker_map{
+  width: 900px;
+  height: 450px;
+}
+
+.choose_satellite{
+  width: 900px;
+  background-color: antiquewhite;
+}
+
 .container{
   position:relative;
   padding:0px;
@@ -19,7 +39,16 @@ html {
   padding: 10px;
   color: white;
   margin: 0;
-  height: 70px;
+  height: 60px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and
+font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none
 }
 
 /* The side navigation menu */

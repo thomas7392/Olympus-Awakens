@@ -98,8 +98,11 @@ div.content {
     height: auto;
     position: relative;
   }
-  .sidebar a {text-align: center;
-    float: none;}
-
-  div.content {margin-left: 0; width: 100%; float: none;}
+  .sidebar a {text-align: center; float: none;}
+  div.content {width:80%; margin-left: 10%; margin-right: 10%;}
+  .narrow {width: 100%;}
+  .choose_satellite{width:100%; }
+  .tracker_info{width:100%; }
+  .tracker_map{width:100%; }
+   h1{margin: 0; text-align: center;}
 }

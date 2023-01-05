@@ -32,10 +32,11 @@
 
     {% extends "template.html" %}
     {% block content %}
-      <h1> Satellite tracker </h1>
-      <p> Choose your satellite: </p>
+
+    <h1> Satellite tracker </h1>
 
       <div class="choose_satellite">
+        <p> Choose your satellite: </p>
         <!-- Request satellite in a dropdown menu -->
         <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
           <label for="satellite">Example satellites: </label>

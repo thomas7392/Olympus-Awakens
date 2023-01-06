@@ -41,6 +41,7 @@ html {
   color: white;
   margin: 0;
   height: 60px;
+  line-height: 60px; /* same as height! */
 }
 
 /* Style the logo link (notice that we set the same value of line-height and

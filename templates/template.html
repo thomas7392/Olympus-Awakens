@@ -21,20 +21,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0">
     <script src="https://kit.fontawesome.com/840a04b753.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static',     filename='css/template.css') }}">
+
+    <script>
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+      function openNav() {
+        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+        if (width > 700){
+          document.getElementById("mySidebar").style.width = "200px";
+          document.getElementById("myHeader").style.marginLeft = "200px";
+        }
+        else {document.getElementById("mySidebar").style.width = "100%";}
+
+        // document.getElementById("main_content_body").style.marginLeft = "200px";
+
+      }
+
+      /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+      function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("myHeader").style.marginLeft = "0";
+
+        // document.getElementById("main_content_body").style.marginLeft = "0";
+      }
+  </script>
   </head>
 
   <body>
     <div class="container">
-      <div class = "header">
+
+      <div class = "header" id="myHeader">
+        <button class="open_nav" onclick="openNav()">&#9776;</i></button>
         <a href="{{ url_for('home') }}" class = "logo"> Thomas Goldman </a>
       </div>
 
-      <div class="sidebar">
-        <a href="{{ url_for('home') }}"><i class="fa fa-fw fa-home"></i>Home</a>
-        <a href="{{ url_for('satellite_tracker') }}"><i class='fas fa-satellite'></i>Satellite Tracker</a>
+      <div class="sidebar" id="mySidebar">
+        <span href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</span>
+        <a href="{{ url_for('home') }}"><i class="fa fa-fw fa-home"></i>  Home</a>
+        <a href="{{ url_for('satellite_tracker') }}"><i class='fas fa-satellite'></i>  Satellite Tracker</a>
       </div>
 
-      <div class="content">
+      <div class="content" id = "main_content_body">
         {% block content %}
         {% endblock %}
       </div>

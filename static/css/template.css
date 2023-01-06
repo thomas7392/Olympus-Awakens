@@ -9,7 +9,7 @@ html {
 }
 
 .narrow{
-  width: 900px;
+  width: 100%;
 }
 
 .tracker_info{
@@ -50,18 +50,26 @@ font-size to prevent the header to increase when the font gets bigger */
   font-size: 35px;
   font-weight: bold;
   color: white;
-  text-decoration: none
+  text-decoration: none;
+  padding-right: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+.header a.logo:hover{
+  color: black;
 }
 
 /* The side navigation menu */
 .sidebar {
   margin: 0;
   padding: 0;
-  width: 200px;
+  width: 0px;
   background-color: #f1f1f1;
   height: 100%;
   overflow: auto;
-  position: absolute;
+  position: fixed;
+  padding-top: 60px;
 }
 
 /* Sidebar links */
@@ -70,6 +78,41 @@ font-size to prevent the header to increase when the font gets bigger */
   color: black;
   padding: 16px;
   text-decoration: none;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  height: 40px;
+  width: 40px;
+  font-size: 45px;
+  margin-left: 50px;
+  background-color: #f1f1f1;
+  text-align: center;
+  line-height: 40px; /* same as height! */
+}
+
+.sidebar .closebtn:hover{
+  color: red;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.open_nav{
+  border: None;
+  width: 32px;
+  background-color: rgb(74, 93, 112);
+  font-size: 30px;
+  margin: 0px;
+  padding: 0px;
+  color: white;
+}
+
+.open_nav:hover {
+  background-color: rgb(74, 93, 112);
+  color: black;
 }
 
 /* Active/current link */
@@ -90,6 +133,11 @@ div.content {
   padding: 1px 16px;
   height: 1000px;
   width: 60%;
+}
+
+p {
+  width: 100%;
+  margin: 0;
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */

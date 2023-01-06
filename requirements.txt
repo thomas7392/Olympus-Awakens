@@ -4,3 +4,4 @@ datetime
 pytz
 skyfield
 git+https://github.com/flask-extensions/Flask-GoogleMaps
+google-cloud-datastore

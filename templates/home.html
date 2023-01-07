@@ -7,16 +7,21 @@
   <body>
       {% extends "template.html" %}
       {% block content %}
-      <div class="home_background">
+      <div class="sts_background">
         <div class="home_content">
         <h1 class="home"> Homepage </h1>
           <p class="home" > Welcome, my name is Thomas Goldman and I'am an aerospace engineer. This page is a personal project
           to explore how websites are created and challenge myself to build web applications. So far,
           I have created an application that shows the current position of any satellite.</p>
 
-        <a class="home_button_to_satellite_tracker" href="{{ url_for('satellite_tracker') }}"><i class='fas fa-satellite'></i>&nbsp;&nbsp;Satellite Tracker</a>
+        <div class = "btn-group">
+          <button>
+            <a class="no_text_decoration white_text font_size_medium" href="{{ url_for('profile') }}"><i class='fa fa-fw fa-home'></i>&nbsp;&nbsp;My Profile</a>
+          </button>
+          <button>
+            <a class="no_text_decoration white_text font_size_medium" href="{{ url_for('satellite_tracker') }}"><i class='fas fa-satellite'></i>&nbsp;&nbsp;Satellite Tracker</a>
+          </button>
         </div>
-      </div>
       {% endblock %}
   </body>
 </html>

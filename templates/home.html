@@ -7,10 +7,14 @@
   <body>
       {% extends "template.html" %}
       {% block content %}
-        <h1> Homepage </h1>
-          <p> Hi I am Thomas and this is my webpage. I made this page as a personal project
-          to explore how websites are created and challenge myself to built web applications. So far,
-          I have created an application that shows the current position of any satellite.</p>
+      <div class="home_content">
+      <h1> Homepage </h1> <br>
+        <p style="margin-bottom: 40px;"> Hi I am Thomas and this is my webpage. I made this page as a personal project
+        to explore how websites are created and challenge myself to built web applications. So far,
+        I have created an application that shows the current position of any satellite.</p>
+
+      <a class="home_button_to_satellite_tracker" href="{{ url_for('satellite_tracker') }}"><i class='fas fa-satellite'></i>&nbsp;&nbsp;Satellite Tracker</a>
+      </div>
       {% endblock %}
   </body>
 </html>

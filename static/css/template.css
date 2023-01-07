@@ -6,6 +6,7 @@ body {
 
 html {
   height: 100%;
+  scroll-behavior: smooth;
 }
 
 .narrow{
@@ -43,6 +44,8 @@ html {
   width: 100%;
   /* display: table; */
   line-height: 80px;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
 }
 
 /* Style the logo link (notice that we set the same value of line-height and
@@ -90,6 +93,8 @@ font-size to prevent the header to increase when the font gets bigger */
   position: fixed;
   padding-top: 60px;
   z-index: 100;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
 }
 
 /* Sidebar links */
@@ -153,6 +158,8 @@ div.move_content_for_nav{
   height: 100%;
   width: 100%;
   position:relative;
+  transition-timing-function: ease-in;
+  transition-duration: 200ms;
 }
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */

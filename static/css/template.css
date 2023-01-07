@@ -2,6 +2,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   min-height: 100%;
   margin: 0;
+  line-height: 1.2;
 }
 
 html {
@@ -16,7 +17,7 @@ p {
 
 /*
 ================================
-General stuff
+General divs
 ================================
 */
 
@@ -38,12 +39,25 @@ div.move_content_for_nav{
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
   height: 100%;
-  width: 60%;
-  padding-left: 20%;
-  padding-right: 20%;
+  width: 70%;
+  padding-left: 15%;
+  padding-right: 15%;
   position:relative;
 }
 
+div.under_construction {
+  background-color: rgb(196, 161, 161);
+  color: black;
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  font-weight: bold;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
 
 /*
 ================================
@@ -57,7 +71,6 @@ Header specific
   margin: 0;
   height: 80px;
   width: 100%;
-  /* display: table; */
   line-height: 80px;
   transition-duration: 200ms;
   transition-timing-function: ease-in;
@@ -72,6 +85,16 @@ font-size to prevent the header to increase when the font gets bigger */
   text-decoration: none;
   position: relative;
   padding-left: 20px;
+  transition-duration: 200ms;
+  /* transition-timing-function: ease-in; */
+  /* padding: 0;
+  margin: 0; */
+}
+
+div.moving_logo{
+  padding-left: 20px;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
 }
 
 .header a.logo:hover{
@@ -165,16 +188,16 @@ Home specific
 ================================
 */
 div.home_content {
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 5%;
+  width: 700px;
+  /* margin-left: 25%;
+  margin-right: 25%; */
+  margin-top: 3%;
   position:relative;
   text-align: center;
   color: black;
 }
 
-div.home_background{
+div.sts_background{
   position: relative;
   height: calc(100vh - 80px);
   width: 100%;
@@ -182,7 +205,7 @@ div.home_background{
   justify-content: center;
 }
 
-div.home_background::before {
+div.sts_background::before {
   content: "";
   background-image: url("/static/images/space-shuttle-launch-hd-1.jpg");  background-size: cover;
   background-position: bottom 80% center;
@@ -206,24 +229,40 @@ h1.home {
   color: white;
 }
 
-.home_button_to_satellite_tracker{
-  text-decoration: none;
-  color: white;
-  background-color: rgb(201, 167, 167);
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
+.btn-group button {
+  background-color: rgb(201, 167, 167); /* Green background */
+  color: white; /* White text */
+  cursor: pointer; /* Pointer/hand icon */
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
-  padding: 5px 30px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  width: 200px;
+  margin: 10px 5px;
+  padding: 5px 20px;
 }
 
-.home_button_to_satellite_tracker:hover{
-  color: black;
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #cf6565;
 }
+
+a.no_text_decoration{
+  text-decoration: none;
+}
+
+a.white_text{
+  color: white;
+}
+
+a.font_size_medium{
+  font-size: 17px;
+}
+
 
 /*
 ================================

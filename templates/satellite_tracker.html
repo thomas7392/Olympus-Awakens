@@ -39,14 +39,13 @@
           <!-- Request satellite in a dropdown menu -->
           <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
             <label for="satellite">Example satellites: </label>
-            <select id="mySelect" name="satellite">
-              <option value="iss">ISS</option>
-              <option value="icesat2">ICESAT-2</option>
-              <option value="hubble">Hubble</option>
-            </select>
+              <select id="mySelect" name="satellite">
+                <option value="iss">ISS</option>
+                <option value="icesat2">ICESAT-2</option>
+                <option value="hubble">Hubble</option>
+              </select>
             <input type="submit" value="Submit">
           </form>
-
           <!-- Request satellite in an open field -->
           <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
             <label for="satellite_norad">Satellite NORAD ID: </label>

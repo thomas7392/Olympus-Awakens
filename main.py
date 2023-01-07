@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_googlemaps import GoogleMaps, Map
 import time
 import os.path
@@ -29,9 +29,14 @@ app = Flask(__name__)
 
 GoogleMaps(app, key=maps_api_key)
 
+
 @app.route("/")
 def home():
     return render_template("home.html")
+
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
 
 @app.route("/update-satellite-position")
 def update_satellite_position():

@@ -9,25 +9,16 @@ html {
   scroll-behavior: smooth;
 }
 
-.narrow{
+p {
   width: 100%;
+  margin: 0;
 }
 
-.tracker_info{
-  padding: 0px;
-  background-color: antiquewhite;
-  width: 100%;
-}
-
-.tracker_map{
-  width: 100%;
-  height: 450px;
-}
-
-.choose_satellite{
-  width: 100%;
-  background-color: antiquewhite;
-}
+/*
+================================
+General stuff
+================================
+*/
 
 .container{
   position:relative;
@@ -35,6 +26,30 @@ html {
   height: 100%;
   width: 100%;
 }
+
+div.move_content_for_nav{
+  height: 100%;
+  width: 100%;
+  position:relative;
+  transition-timing-function: ease-in;
+  transition-duration: 200ms;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+  height: 100%;
+  width: 60%;
+  padding-left: 20%;
+  padding-right: 20%;
+  position:relative;
+}
+
+
+/*
+================================
+Header specific
+================================
+*/
 
 .header{
   background-color: rgb(74, 93, 112);
@@ -81,6 +96,12 @@ font-size to prevent the header to increase when the font gets bigger */
   color: black;
 }
 
+
+/*
+================================
+Sidebar navigation specific
+================================
+*/
 
 /* The side navigation menu */
 .sidebar {
@@ -137,43 +158,52 @@ font-size to prevent the header to increase when the font gets bigger */
   color: white;
 }
 
+
+/*
+================================
+Home specific
+================================
+*/
 div.home_content {
   width: 50%;
   margin-left: 25%;
   margin-right: 25%;
-  margin-top: 30px;
+  margin-top: 5%;
   position:relative;
   text-align: center;
+  color: black;
 }
 
-div.satellite_tracker_content {
-  height: 100%;
-  width: 70%;
-  padding-left: 15%;
-  padding-right: 15%;
-  position:relative;
-}
-
-div.move_content_for_nav{
-  height: 100%;
+div.home_background{
+  position: relative;
+  height: calc(100vh - 80px);
   width: 100%;
-  position:relative;
-  transition-timing-function: ease-in;
-  transition-duration: 200ms;
+  display: flex;
+  justify-content: center;
 }
 
-/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-div.content {
-  height: 100%;
-  width: 60%;
-  padding-left: 20%;
-  padding-right: 20%;
-  position:relative;
+div.home_background::before {
+  content: "";
+  background-image: url("/static/images/space-shuttle-launch-hd-1.jpg");  background-size: cover;
+  background-position: bottom 80% center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.7;
 }
 
-p {
-  width: 100%;
-  margin: 0;
+p.home {
+  color: black;
+  margin-bottom: 40px;
+  /* font-weight: bold; */
+  margin-top: 1%;
+  font-size: 25px;
+}
+
+h1.home {
+  color: white;
 }
 
 .home_button_to_satellite_tracker{
@@ -195,6 +225,39 @@ p {
   color: black;
 }
 
+/*
+================================
+Satellite tracker specific
+================================
+*/
+
+
+div.satellite_tracker_content {
+  height: 100%;
+  width: 70%;
+  padding-left: 15%;
+  padding-right: 15%;
+  position:relative;
+}
+
+.choose_satellite{
+  width: 100%;
+  background-color: antiquewhite;
+}
+
+.tracker_info{
+  padding: 0px;
+  background-color: antiquewhite;
+  width: 100%;
+}
+
+.tracker_map{
+  width: 100%;
+  height: 450px;
+}
+
+
+
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 700px) {
   /* .sidebar {
@@ -203,14 +266,26 @@ p {
     position: relative;
   } */
   /* .sidebar a {text-align: center; float: none;} */
-  div.satellite_tracker_content {width:94%; padding-left: 3%; padding-right: 3%; margin: 0; padding-top: 10%; font-size: 22px;}
-  div.home_content {width:80%; padding-left: 10%; padding-right: 10%; margin: 0; padding-top: 10%; font-size: 22px;}
+  div.home_content {width:90%; padding-left: 5%; padding-right: 5%; margin: 0; padding-top: 20%; font-size: 22px;}
   div.content {width:80%; padding-left: 10%; padding-right: 10%; margin: 0;}
-  .choose_satellite{width:100%; margin-top: 5%;}
+
+  div.satellite_tracker_content {width:94%; padding-left: 3%; padding-right: 3%; margin: 0; padding-top: 10%; font-size: 22px;}
+  .choose_satellite{width: 100%; margin-top: 10%; padding: 0px;}
   .tracker_info{width:100%; }
   .tracker_map{width:100%; }
 
-    h1 {font-size: 40px; text-align: center;}
+  form { width: 100%; padding: 0; margin: 0;}
+
+  p.home {
+    color: black;
+    margin-bottom: 40px;
+    /* font-weight: bold; */
+    margin-top: 1%;
+    font-size: 22px;
+  }
+
+    h1.home {font-size: 40px; text-align: center; color: white;}
+    h1 {text-align: center;}
    .header a.logo{
     font-size: 25px;
     padding-left: 5%;
@@ -235,4 +310,5 @@ p {
     background-color: antiquewhite;
     padding: 0px 2%;
   }
+
 }

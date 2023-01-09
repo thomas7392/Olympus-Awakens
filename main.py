@@ -6,7 +6,6 @@ import os.path
 from satellite_tracker import get_ground_track, get_current_satellite_position
 from utils import get_secret
 
-
 # When developing locally, get local key
 if os.path.exists("api_secrets.py"):
     from api_secrets import MAPS_DEV_API_KEY
@@ -30,7 +29,9 @@ def profile():
 @app.route("/update-satellite-position")
 def update_satellite_position():
 
+    global TLE_lines
     latitude, longitude = get_current_satellite_position(TLE_lines)
+
     return jsonify({"latitude": latitude, "longitude": longitude})
 
 @app.route("/satellite_tracker", methods = ['GET', 'POST'])

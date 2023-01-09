@@ -13,8 +13,6 @@ from skyfield.api import load, EarthSatellite
 # Querying imports
 from get_tle_local import get_tle_local
 from get_tle_sql import get_tle_sql
-from get_tle_memcache import get_tle_memcache
-
 
 SATELLITE_TO_NORAD = dict(icesat2 = 43613,
                           iss = 25544,
@@ -22,9 +20,6 @@ SATELLITE_TO_NORAD = dict(icesat2 = 43613,
 
 
 def get_tle(norad, method):
-
-    if method == "memcache":
-        return get_tle_memcache(norad)
 
     if method == "sql":
         return get_tle_sql(norad)
@@ -45,6 +40,8 @@ def get_ground_track(satellite, IS_NORAD = False):
     else:
         norad = SATELLITE_TO_NORAD[satellite]
 
+    # Choose if searchgin tle in local cache (dev) or in
+    # the sql database (production)
     if os.path.exists("api_secrets.py"):
         get_tle_method = "local"
     else:

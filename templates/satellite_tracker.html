@@ -6,23 +6,31 @@
     <title>Satellite Tracker</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-
-      function startTracking() {
+      function startTracking(tle1, tle2, tle3) {
         // Set up a timer to make an AJAX request every 3 seconds
-        setInterval(updateMarker, 3000);
+        setInterval(updateMarker, 3000, tle1, tle2, tle3);
       }
 
-      function updateMarker() {
-          // Make an AJAX request to your Flask app to get the updated satellite position
-        $.get("/update-satellite-position", function(data) {
-          // Update the marker's position on the map using the Google Maps JavaScript API
-          map_markers[0].setPosition(new google.maps.LatLng(data.latitude, data.longitude));
-          var lat = document.getElementById('lat');
-          var lon = document.getElementById('lon');
+      function updateMarker(tle1, tle2, tle3) {
+        // Make an AJAX request to your Flask app to get the updated satellite position
+        $.ajax({type: 'POST',
+               url: "{{url_for('update_satellite_position')}}",
+               data: {'tle1': tle1, 'tle2': tle2, 'tle3': tle3},
+               success: function(response){
 
-          lat.innerHTML = data.latitude.toFixed(4)
-          lon.innerHTML = data.longitude.toFixed(4)
-        });
+              var lat_response = response.latitude
+              var lon_response = response.longitude
+
+              // Update the marker's position on the map using the Google Maps JavaScript API
+              map_markers[0].setPosition(new google.maps.LatLng(lat_response , lon_response));
+
+              var lat = document.getElementById('lat');
+              var lon = document.getElementById('lon');
+
+              lat.innerHTML = lat_response.toFixed(4)
+              lon.innerHTML = lon_response.toFixed(4)
+
+        }});
       }
     </script>
   </head>
@@ -42,10 +50,11 @@
               <select id="mySelect" name="satellite">
                 <option value="iss">ISS</option>
                 <option value="icesat2">ICESAT-2</option>
-                <option value="hubble">Hubble</option>
+                <option value="hubble"> Hubble</option>
               </select>
             <input type="submit" value="Submit">
           </form>
+
           <!-- Request satellite in an open field -->
           <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
             <label for="satellite_norad">Satellite NORAD ID: </label>
@@ -74,7 +83,7 @@
 
             <script>
               // Call the startTracking function after the map has been created
-              startTracking();
+              startTracking('{{tle1}}', '{{tle2}}', '{{tle3}}');
             </script>
           {% endif %}
 

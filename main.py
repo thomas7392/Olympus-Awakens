@@ -8,8 +8,7 @@ from utils import get_secret
 
 # When developing locally, get local key
 if os.path.exists("api_secrets.py"):
-    from api_secrets import MAPS_DEV_API_KEY
-    maps_api_key = MAPS_DEV_API_KEY
+    from api_secrets import MAPS_DEV_API_KEY as maps_api_key
 else:
     maps_api_key = get_secret("production_maps_api_key")
 
@@ -26,13 +25,21 @@ def home():
 def profile():
     return render_template("profile.html")
 
-@app.route("/update-satellite-position")
+@app.route("/update_satellite_position", methods = ['POST', 'GET'])
 def update_satellite_position():
 
-    global TLE_lines
-    latitude, longitude = get_current_satellite_position(TLE_lines)
+    #global TLE_lines
+    if request.method == "POST":
+        tle1=request.values.get('tle1')
+        tle2=request.values.get('tle2')
+        tle3=request.values.get('tle3')
+        TLE_lines = [tle1, tle2, tle3]
 
-    return jsonify({"latitude": latitude, "longitude": longitude})
+        latitude, longitude = get_current_satellite_position(TLE_lines)
+
+        return jsonify({"latitude": latitude, "longitude": longitude})
+
+    return None
 
 @app.route("/satellite_tracker", methods = ['GET', 'POST'])
 def satellite_tracker():
@@ -61,10 +68,6 @@ def satellite_tracker():
                 return render_template("satellite_tracker.html", no_sat = True)
 
         ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]
-
-        # Save the TLE_lines globally, to calculate future positions dynamically without additional query
-        global TLE_lines
-        TLE_lines = sat_data['sat_tle_lines']
 
         # Create map
         mymap = Map(identifier="view-side",

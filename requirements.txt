@@ -5,3 +5,9 @@ pytz
 skyfield
 git+https://github.com/flask-extensions/Flask-GoogleMaps
 google-cloud-datastore
+google-cloud-memcache
+google-cloud-secret-manager
+google-cloud-memcache
+cloud-sql-python-connector
+sqlalchemy<2.0
+pymysql

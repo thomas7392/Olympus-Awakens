@@ -1,3 +1,9 @@
+'''
+This file contains functionality to store the tle's locally in a cache.
+Google app engine doesn't support writing to disk. So this can't be used there.
+It can be used locally for testing though. So it will remain here.
+'''
+
 from urllib.request import urlopen
 import datetime
 import json
@@ -8,15 +14,14 @@ TLE_CACHE_PATH = ".cache/tle.json"
 MAX_TLE_CACHE_TIME = 6 * 60 # Minutes
 CACHE_PATH = ".cache/"
 
-def get_tle(norad):
+def get_tle_local(norad):
     '''
     This function searches the cache for a tle and if not present
     or if experied (after x hours), queries a new one. This shoud
     result in querying celestrak to a minimum.
     '''
 
-    # initialize not removing the key
-    remove = False
+    print("Getting the TLE through local cache system")
 
     # Check if cache exists
     if not path.exists(CACHE_PATH):
@@ -35,12 +40,15 @@ def get_tle(norad):
 
             # Check if still up to date
             if not is_expired(TLE_json, norad):
-
+                print("I am not expired")
                 # if valid, return the tle
                 return TLE_json[str(norad)]["tle"]
 
     # query new tle and save it (overriding potentially exisiting tle of this satellite)
+    print("I am expired")
     TLE_lines = query_tle(norad)
+    if len(TLE_lines) != 3:
+        return None
     add_satellite(norad, TLE_lines)
     return TLE_lines
 
@@ -124,6 +132,9 @@ def is_expired(TLE_json, norad):
                                 second = TLE_json[str(norad)]["second"])
 
     # If TLE not young enough, update
+    print(time_now)
+    print(time_tle)
+    print((time_now - time_tle).total_seconds() / 60.0)
     if (time_now - time_tle).total_seconds() / 60.0 > MAX_TLE_CACHE_TIME:
         print("I found an expired one")
         return True

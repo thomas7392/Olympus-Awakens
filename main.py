@@ -4,31 +4,20 @@ import time
 import os.path
 
 from satellite_tracker import get_ground_track, get_current_satellite_position
+from utils import get_secret
 
-from google.cloud import datastore
-
-def get_maps_api_key():
-    '''
-    Requests the production maps API key from the datastore
-    '''
-    client = datastore.Client()
-    task_key = client.key("Task", 5644004762845184)
-    task = client.get(task_key)
-
-    return task['key']
 
 # When developing locally, get local key
 if os.path.exists("api_secrets.py"):
     from api_secrets import MAPS_DEV_API_KEY
     maps_api_key = MAPS_DEV_API_KEY
 else:
-    maps_api_key = get_maps_api_key()
+    maps_api_key = get_secret("production_maps_api_key")
 
 # Google maps javascript api key
 app = Flask(__name__)
 
 GoogleMaps(app, key=maps_api_key)
-
 
 @app.route("/")
 def home():
@@ -65,8 +54,9 @@ def satellite_tracker():
 
             # Request satellite from norad field
             sat_data = get_ground_track(user_satellite_norad, IS_NORAD = True)
+
             # Check if NORAD ID was found
-            if sat_data == False:
+            if sat_data is None:
                 return render_template("satellite_tracker.html", no_sat = True)
 
         ground_track = [coord for coord in zip(sat_data['sat_lat'], sat_data['sat_lon'])]

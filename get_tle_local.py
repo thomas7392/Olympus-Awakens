@@ -21,8 +21,6 @@ def get_tle_local(norad):
     result in querying celestrak to a minimum.
     '''
 
-    print("Getting the TLE through local cache system")
-
     # Check if cache exists
     if not path.exists(CACHE_PATH):
         print("Hello, world")
@@ -40,12 +38,11 @@ def get_tle_local(norad):
 
             # Check if still up to date
             if not is_expired(TLE_json, norad):
-                print("I am not expired")
+
                 # if valid, return the tle
                 return TLE_json[str(norad)]["tle"]
 
     # query new tle and save it (overriding potentially exisiting tle of this satellite)
-    print("I am expired")
     TLE_lines = query_tle(norad)
     if len(TLE_lines) != 3:
         return None
@@ -132,11 +129,7 @@ def is_expired(TLE_json, norad):
                                 second = TLE_json[str(norad)]["second"])
 
     # If TLE not young enough, update
-    print(time_now)
-    print(time_tle)
-    print((time_now - time_tle).total_seconds() / 60.0)
     if (time_now - time_tle).total_seconds() / 60.0 > MAX_TLE_CACHE_TIME:
-        print("I found an expired one")
         return True
 
     return False

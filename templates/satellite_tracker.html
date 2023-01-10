@@ -88,11 +88,18 @@
           {% endif %}
 
         <!-- Respond if satellite not found -->
-        <div>
           {% if no_sat is defined %}
-              This NORAD ID is not valid or the satellite could not be found.
+            <div class="under_construction">
+              <span class="middle" style="color: rgb(68, 68, 68);">No satellite with this NORAD ID could be found on celestrak </span>
+            </div>
           {% endif %}
-        </div>
+          {% if no_norad is defined %}
+            <div class="under_construction">
+                <span class="middle" style="color: rgb(68, 68, 68);"> This is not a valid NORAD ID. (Old) NORAD ID's are 5 digit integers.
+                  For example: <span style="color: green;">25544 </span> for the <span style="color: green;">International Space Station</span>.
+                  For more information on NORAD ID's see <a href="https://en.wikipedia.org/wiki/Satellite_Catalog_Number" target="_blank">here</a>.</span>
+            </div>
+          {% endif %}
       </div>
     {% endblock %}
   </body>

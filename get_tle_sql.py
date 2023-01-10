@@ -18,13 +18,14 @@ def get_tle_sql(norad):
     '''
     This function manages the where the TLE is taken from.
     '''
+
     sat_data = get_satellite(norad)
 
     # If not found, query from celestrak and add to database
     if sat_data is None:
         TLE_lines = query_tle(norad)
 
-        # Check is existing norad
+        # Check if existing norad
         if len(TLE_lines) != 3:
             return None
 

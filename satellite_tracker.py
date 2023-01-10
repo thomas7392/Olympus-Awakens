@@ -72,8 +72,6 @@ def get_ground_track(satellite, IS_NORAD = False):
     lon = subsat.longitude.degrees
     lat = subsat.latitude.degrees
 
-    print(TLE_lines[0])
-    print(type(TLE_lines[0]))
     sat_data = dict(sat_name = satellite_name,
                     sat_norad = satellite_norad,
                     sat_lat = lat,

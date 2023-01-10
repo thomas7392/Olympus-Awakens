@@ -61,7 +61,10 @@ def satellite_tracker():
         if user_satellite_norad!=None:
 
             # Request satellite from norad field
-            sat_data = get_ground_track(user_satellite_norad, IS_NORAD = True)
+            if user_satellite_norad.isdigit() and len(user_satellite_norad) == 5:
+                sat_data = get_ground_track(user_satellite_norad, IS_NORAD = True)
+            else:
+                return render_template("satellite_tracker.html", no_norad = True)
 
             # Check if NORAD ID was found
             if sat_data is None:

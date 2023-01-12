@@ -1,61 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script type="text/javascript">
-      WebFontConfig = {
-        google: { families: [ 'Montserrat::latin' ] }
-      };
-      (function() {
-        var wf = document.createElement('script');
-        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-      })();
-    </script>
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        src: url("{{ url_for('static', filename='fonts/Montserrat-VariableFont_wght.ttf')}}");
+        font-style: normal;
+        font-weight: 1 1000;
+      }
+    </style>
+    <title>{% block page_title %}Webb App Parent Template{% endblock %}</title>
     <meta charset="utf-8">
-    <title>Webb App Parent Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0">
     <script src="https://kit.fontawesome.com/840a04b753.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static',     filename='css/template.css') }}">
-    <!-- <link rel="icon" type="image/ico" href="https://spanish-culture-project.thepeeps191.repl.co/static/favicon.ico"> -->
-    <script>
-    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-      var open = false;
-
-      function openNav() {
-        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-
-        if (document.getElementById("mySidebar").style.width == "200px"){
-          closeNav();
-        }
-        else{
-          if (width > 700){
-            document.getElementById("mySidebar").style.width = "200px";
-            document.getElementById("myHeader").style.marginLeft = "200px";
-            document.getElementById("myHeader").style.width = "calc(100vw - 200px)";
-            document.getElementById("move_content_for_nav").style.marginLeft = "200px"
-            document.getElementById("move_content_for_nav").style.width = "calc(100vw - 200px)";
-          }
-          else {document.getElementById("mySidebar").style.width = "200px";
-                document.getElementById("myHeader").style.marginLeft = "200px";
-                document.getElementById("move_content_for_nav").style.marginLeft = "200px";}
-          var open = true;
-        }
-      }
-
-      /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-      function closeNav() {
-        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-        document.getElementById("mySidebar").style.width = "0px";
-        document.getElementById("myHeader").style.marginLeft = "0px";
-        document.getElementById("move_content_for_nav").style.marginLeft = "0px"
-        document.getElementById("move_content_for_nav").style.width = "100%";
-        document.getElementById("myHeader").style.width = "100%";
-      }
-  </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
+    <script src="{{ url_for('static', filename='js/sidenav.js') }}"></script>
+    {% block head %}
+    {% endblock %}
   </head>
 
   <body>

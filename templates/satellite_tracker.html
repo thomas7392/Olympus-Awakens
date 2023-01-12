@@ -46,13 +46,13 @@
           <p> Choose your satellite: </p>
           <!-- Request satellite in a dropdown menu -->
           <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
-            <label for="satellite">Example satellites: </label>
+            <label style = "display: inline-block;" for="satellite">Example satellites: </label>
               <select id="mySelect" name="satellite">
                 <option value="iss">ISS</option>
                 <option value="icesat2">ICESAT-2</option>
                 <option value="hubble"> Hubble</option>
               </select>
-            <input type="submit" value="Submit">
+            <input style = "display: inline-block;" type="submit" value="Submit">
           </form>
 
           <!-- Request satellite in an open field -->
@@ -93,13 +93,15 @@
               <span class="middle" style="color: rgb(68, 68, 68);">No satellite with this NORAD ID could be found on celestrak </span>
             </div>
           {% endif %}
+
           {% if no_norad is defined %}
-            <div class="under_construction">
+            <div class="red_wide_block round_edges">
                 <span class="middle" style="color: rgb(68, 68, 68);"> This is not a valid NORAD ID. (Old) NORAD ID's are 5 digit integers.
                   For example: <span style="color: green;">25544 </span> for the <span style="color: green;">International Space Station</span>.
                   For more information on NORAD ID's see <a href="https://en.wikipedia.org/wiki/Satellite_Catalog_Number" target="_blank">here</a>.</span>
             </div>
           {% endif %}
+
       </div>
     {% endblock %}
   </body>

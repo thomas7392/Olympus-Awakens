@@ -45,17 +45,26 @@ div.content {
   position:relative;
 }
 
-div.under_construction {
+div.red_wide_block {
   background-color: rgb(196, 161, 161);
   color: black;
   width: 100%;
   word-wrap: break-word;
   text-align: center;
   font-weight: bold;
+}
+
+div.round_edges{
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
+}
+
+div.contacts {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: rgb(196, 161, 161);
 }
 
 span.middle
@@ -316,7 +325,7 @@ div.satellite_tracker_content {
   div.home_content {width:90%; padding-left: 5%; padding-right: 5%; margin: 0; padding-top: 20%; font-size: 22px;}
   div.content {width:80%; padding-left: 10%; padding-right: 10%; margin: 0;}
 
-  div.satellite_tracker_content {width:94%; padding-left: 3%; padding-right: 3%; margin: 0; padding-top: 10%; font-size: 22px;}
+  div.satellite_tracker_content {width:94%; margin-left: 3%; margin-right: 3%; margin-top: 10%; padding: 0px; font-size: 22px;}
   .choose_satellite{width: 100%; margin-top: 10%; padding: 0px;}
   .tracker_info{width:100%; }
   .tracker_map{width:100%; }
@@ -356,6 +365,14 @@ div.satellite_tracker_content {
     width: 100%;
     background-color: antiquewhite;
     padding: 0px 2%;
+  }
+
+  div.contacts {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 0px;
+    background-color: rgb(196, 161, 161);
   }
 
 }

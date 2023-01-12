@@ -13,12 +13,10 @@
             <p class="home" > Welcome, my name is Thomas Goldman and I'm an aerospace engineer. This page is a personal project
             to explore how websites are created and challenge myself to build web applications. So far,
             I have created an application that shows the current position of any satellite.</p>
-
           <div class="btn-group">
-            <button onclick="location.href='{{url_for('profile')}}'" ><i class='fa fa-fw fa-home'></i>&nbsp;&nbsp;My Profile</button>
-            <button onclick="location.href='{{url_for('satellite_tracker')}}'"><i class='fas fa-satellite'></i>&nbsp;&nbsp;Satellite Tracker</button>
+            <button onclick= "location.href='{{url_for('profile')}}'" ><i class='fa-solid fa-user'></i>&nbsp;&nbsp;My Profile</button>
+            <button onclick= "location.href='{{url_for('satellite_tracker')}}'"><i class='fas fa-satellite'></i>&nbsp;&nbsp;Satellite Tracker</button>
           </div>
-
         </div>
       </div>
       {% endblock %}

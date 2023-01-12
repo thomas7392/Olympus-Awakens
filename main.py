@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_googlemaps import GoogleMaps, Map
-import time
 import os.path
+import os
 
 from satellite_tracker import get_ground_track, get_current_satellite_position
 from utils import get_secret
@@ -16,6 +16,11 @@ else:
 app = Flask(__name__)
 
 GoogleMaps(app, key=maps_api_key)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static/'),
+        'favicon.ico')
 
 @app.route("/")
 def home():

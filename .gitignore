@@ -2,3 +2,4 @@ lib/*
 __pycache__/*
 api_secrets.py
 .cache/*
+.vscode/*

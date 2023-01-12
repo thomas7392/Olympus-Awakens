@@ -110,6 +110,7 @@ def connect_with_connector(database) -> sqlalchemy.engine.base.Engine:
         "mysql+pymysql://",
         creator=getconn,
     )
+
     return connector, pool
 
 def add_satellite(norad, tle_lines):

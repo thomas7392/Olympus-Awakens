@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+    {% extends "template.html" %}
 
-  <head>
-    <meta charset="utf-8">
-    <title>Satellite Tracker</title>
+    {% block page_title %}
+    Satellite Tracker
+    {% endblock %}
+
+    {% block head %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       function startTracking(tle1, tle2, tle3) {
@@ -33,11 +36,8 @@
         }});
       }
     </script>
-  </head>
+    {% endblock %}
 
-  <body>
-
-    {% extends "template.html" %}
     {% block content %}
     <div class = "satellite_tracker_content">
       <h1> Satellite tracker </h1>
@@ -104,5 +104,5 @@
 
       </div>
     {% endblock %}
-  </body>
+
 </html>

@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title> Thomas Goldman - Homepage </title>
-  </head>
-  <body>
-      {% extends "template.html" %}
-      {% block content %}
-      <div class="sts_background">
+    {% extends "template.html" %}
+
+    {% block page_title %}
+    Thomas Goldman - Homepage
+    {% endblock %}
+
+    {% block content %}
+    <div class="sts_background">
         <div class="home_content">
-          <h1 class="home"> Homepage </h1>
+            <h1 class="home"> Homepage </h1>
             <p class="home" > Welcome, my name is Thomas Goldman and I'm an aerospace engineer. This page is a personal project
             to explore how websites are created and challenge myself to build web applications. So far,
             I have created an application that shows the current position of any satellite.</p>
-          <div class="btn-group">
+            <div class="btn-group">
             <button onclick= "location.href='{{url_for('profile')}}'" ><i class='fa-solid fa-user'></i>&nbsp;&nbsp;My Profile</button>
             <button onclick= "location.href='{{url_for('satellite_tracker')}}'"><i class='fas fa-satellite'></i>&nbsp;&nbsp;Satellite Tracker</button>
-          </div>
+            </div>
         </div>
-      </div>
-      {% endblock %}
-  </body>
+    </div>
+    {% endblock %}
+
 </html>

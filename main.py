@@ -40,9 +40,9 @@ def update_satellite_position():
         tle3=request.values.get('tle3')
         TLE_lines = [tle1, tle2, tle3]
 
-        latitude, longitude = get_current_satellite_position(TLE_lines)
+        sat_data = get_current_satellite_position(TLE_lines)
 
-        return jsonify({"latitude": latitude, "longitude": longitude})
+        return jsonify(sat_data)
 
     return None
 

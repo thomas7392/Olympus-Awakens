@@ -301,16 +301,28 @@ div.satellite_tracker_content {
   background-color: antiquewhite;
 }
 
-.tracker_info{
-  padding: 0px;
-  background-color: antiquewhite;
+.satellite_panel{
   width: 100%;
+  overflow: hidden;
+}
+
+.tracker_info{
+  margin-left: 75%;
+  padding: 0px;
+  height: 450px;
+  background-color: antiquewhite;
+  padding: 0.5%;
 }
 
 .tracker_map{
-  width: 100%;
-  height: 450px;
+  width: 73%;
+  height: 600px;
+  float: left;
 }
+
+tbody.alternating_colors tr:nth-child(even) {background-color: #bebdbd; padding: 0px; margin: 0px;}
+tbody.alternating_colors tr:nth-child(odd) {background-color: #b5ccae; padding: 0px; margin: 0px;}
+td {padding: 0px; margin: 0px;}
 
 
 
@@ -327,8 +339,11 @@ div.satellite_tracker_content {
 
   div.satellite_tracker_content {width:94%; margin-left: 3%; margin-right: 3%; margin-top: 10%; padding: 0px; font-size: 22px;}
   .choose_satellite{width: 100%; margin-top: 10%; padding: 0px;}
-  .tracker_info{width:100%; }
-  .tracker_map{width:100%; }
+  .tracker_info{width:100%; height: 300px; margin-top: 640px; margin-left: 0px;  padding: 0.5%;
+  }
+  .tracker_map{width:100%; height: 600px;}
+  .satellite_panel{width: 100%; height: 130%}
+
 
   form { width: 100%; padding: 0; margin: 0;}
 

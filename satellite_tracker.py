@@ -12,7 +12,7 @@ from skyfield.api import load, EarthSatellite
 
 # Querying imports
 from get_tle_local import get_tle_local
-from get_tle_sql import get_tle_sql
+from get_tle_firestore import get_tle_firestore
 
 SATELLITE_TO_NORAD = dict(icesat2 = 43613,
                           iss = 25544,
@@ -21,11 +21,11 @@ SATELLITE_TO_NORAD = dict(icesat2 = 43613,
 
 def get_tle(norad, method):
 
-    if method == "sql":
-        return get_tle_sql(norad)
-
     if method == "local":
-        return get_tle_local(norad)
+        return get_tle_firestore(norad)
+
+    if method == "firestore":
+        return get_tle_firestore(norad)
 
 
 def get_ground_track(satellite, IS_NORAD = False):
@@ -45,7 +45,7 @@ def get_ground_track(satellite, IS_NORAD = False):
     if os.path.exists("api_secrets.py"):
         get_tle_method = "local"
     else:
-        get_tle_method = "sql"
+        get_tle_method = "firestore"
 
     # TLE_lines = get_tle(norad, get_tle_method )
     TLE_lines = get_tle(norad, get_tle_method)

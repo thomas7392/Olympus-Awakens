@@ -8,7 +8,8 @@ import pytz
 import os
 
 # Astrodynamics imports
-from skyfield.api import load, EarthSatellite
+from skyfield.api import load, EarthSatellite, wgs84
+from skyfield.elementslib import osculating_elements_of
 
 # Querying imports
 from get_tle_local import get_tle_local
@@ -17,7 +18,7 @@ from get_tle_firestore import get_tle_firestore
 SATELLITE_TO_NORAD = dict(icesat2 = 43613,
                           iss = 25544,
                           hubble = 20580)
-
+MU_EARTH = 3.986004418e14
 
 def get_tle(norad, method):
 
@@ -47,7 +48,6 @@ def get_ground_track(satellite, IS_NORAD = False):
     else:
         get_tle_method = "firestore"
 
-    # TLE_lines = get_tle(norad, get_tle_method )
     TLE_lines = get_tle(norad, get_tle_method)
 
     if TLE_lines is None:
@@ -71,6 +71,8 @@ def get_ground_track(satellite, IS_NORAD = False):
 
     lon = subsat.longitude.degrees
     lat = subsat.latitude.degrees
+    heights = wgs84.height_of(geocentric).km
+    elements = osculating_elements_of(geocentric)
 
     sat_data = dict(sat_name = satellite_name,
                     sat_norad = satellite_norad,
@@ -80,9 +82,8 @@ def get_ground_track(satellite, IS_NORAD = False):
                     tle1 = TLE_lines[0],
                     tle2 = TLE_lines[1],
                     tle3 = TLE_lines[2],
-                    sat_first_lat = np.round(lat[0], 4),
-                    sat_first_lon = np.round(lon[0], 4)
                     )
+
     return sat_data
 
 def get_current_satellite_position(TLE_lines):
@@ -93,10 +94,33 @@ def get_current_satellite_position(TLE_lines):
     base = datetime.datetime.now(pytz.utc)
     time = ts.from_datetime(base)
 
-    # Calculate lat/lon
+    # Calculate info at current time
     geocentric = sat.at(time)
     subsat = geocentric.subpoint()
-    lon = subsat.longitude.degrees
-    lat = subsat.latitude.degrees
+    elements = osculating_elements_of(geocentric)
 
-    return lat, lon
+    # Store relevant info in a json
+    sat_data = dict(
+        longitude = subsat.longitude.degrees,
+        latitude = subsat.latitude.degrees,
+        altitude = wgs84.height_of(geocentric).km,
+        a = elements.semi_major_axis.km,
+        e = elements.eccentricity,
+        i = elements.inclination.degrees,
+        raan = elements.longitude_of_periapsis.degrees,
+        aop = elements.argument_of_periapsis.degrees,
+        ta = elements.true_anomaly.degrees,
+        speed = vis_viva(trajectory_equation(elements.semi_major_axis.m,
+                                            elements.eccentricity,
+                                            elements.true_anomaly.radians), elements.semi_major_axis.m)/1e3
+    )
+
+    return sat_data
+
+def trajectory_equation(a, e, theta):
+    r = (a * (1 - e**2))/(1 + e * np.cos(theta))
+    return r
+
+def vis_viva(r, a):
+    v = np.sqrt(MU_EARTH * (2/r - 1/a))
+    return v

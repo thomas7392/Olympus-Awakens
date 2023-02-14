@@ -11,15 +11,16 @@
     <script>
       function startTracking(tle1, tle2, tle3) {
         // Set up a timer to make an AJAX request every 3 seconds
+        updateMarker(tle1, tle2, tle3)
         setInterval(updateMarker, 3000, tle1, tle2, tle3);
       }
 
       function updateMarker(tle1, tle2, tle3) {
         // Make an AJAX request to your Flask app to get the updated satellite position
         $.ajax({type: 'POST',
-               url: "{{url_for('update_satellite_position')}}",
-               data: {'tle1': tle1, 'tle2': tle2, 'tle3': tle3},
-               success: function(response){
+              url: "{{url_for('update_satellite_position')}}",
+              data: {'tle1': tle1, 'tle2': tle2, 'tle3': tle3},
+              success: function(response){
 
               var lat_response = response.latitude
               var lon_response = response.longitude
@@ -30,79 +31,142 @@
               var lat = document.getElementById('lat');
               var lon = document.getElementById('lon');
 
+              // Change latitude and longitude
               lat.innerHTML = lat_response.toFixed(4)
               lon.innerHTML = lon_response.toFixed(4)
 
+              // Change altitude and speed
+              document.getElementById('alt').innerHTML = response.altitude.toFixed(4)
+              document.getElementById('speed').innerHTML = response.speed.toFixed(6)
+
+              // Change the Kepler elements
+              document.getElementById('a').innerHTML = response.a.toFixed(4);
+              document.getElementById('e').innerHTML = response.e.toFixed(4);
+              document.getElementById('i').innerHTML = response.i.toFixed(4);
+              document.getElementById('raan').innerHTML = response.raan.toFixed(4);
+              document.getElementById('aop').innerHTML = response.aop.toFixed(4);
+              document.getElementById('ta').innerHTML = response.ta.toFixed(4);
         }});
       }
     </script>
     {% endblock %}
 
     {% block content %}
-    <div class = "satellite_tracker_content">
-      <h1> Satellite tracker </h1>
+      <div class = "satellite_tracker_content">
+        <h1> Satellite tracker </h1>
 
-        <div class="choose_satellite">
-          <p> Choose your satellite: </p>
-          <!-- Request satellite in a dropdown menu -->
-          <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
-            <label style = "display: inline-block;" for="satellite">Example satellites: </label>
-              <select id="mySelect" name="satellite">
-                <option value="iss">ISS</option>
-                <option value="icesat2">ICESAT-2</option>
-                <option value="hubble"> Hubble</option>
-              </select>
-            <input style = "display: inline-block;" type="submit" value="Submit">
-          </form>
+          <div class="choose_satellite round_edges">
+            <p> Choose your satellite: </p>
+            <!-- Request satellite in a dropdown menu -->
+            <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+              <label style = "display: inline-block;" for="satellite">Example satellites: </label>
+                <select id="mySelect" name="satellite">
+                  <option value="iss">ISS</option>
+                  <option value="icesat2">ICESAT-2</option>
+                  <option value="hubble"> Hubble</option>
+                </select>
+              <input style = "display: inline-block;" type="submit" value="Submit">
+            </form>
 
-          <!-- Request satellite in an open field -->
-          <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
-            <label for="satellite_norad">Satellite NORAD ID: </label>
-            <input type="text" id="form2" name="satellite_norad">
-            <input type="submit" value="submit">
-          </form>
-        </div>
-        <br>
+            <!-- Request satellite in an open field -->
+            <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+              <label for="satellite_norad">Satellite NORAD ID: </label>
+              <input type="text" id="form2" name="satellite_norad">
+              <input type="submit" value="submit">
+            </form>
+          </div>
+          <br>
 
-        <!-- Respond to chosen satellite -->
-          {% if sat_name is defined %}
-            <div class="tracker_info">
-              You have selected: {{ sat_name }} <br>
-              NORAD ID: {{sat_norad}} <br> <br>
-              Current position:<br>
-              lat = <span id = "lat">{{sat_first_lat}}</span><br>
-              lon = <span id = "lon">{{sat_first_lon}}</span>
-            </div>
-
-            <br><br>
-
-            <div class="tracker_map">
-              {{mymap.html}}
-              {{mymap.js}}
+          <!-- Respond to chosen satellite -->
+            {% if sat_name is defined %}
+            <div class= "satellite_panel">
+              <div class = "tracker_map">
+                  {{mymap.html}}
+                  {{mymap.js}}
+              </div>
+              <div class="tracker_info round_edges">
+                <div style = "font-weight: bold; font-size: 18px; margin-top: 6px; margin-bottom: 3px;"> Info panel </div>
+                 <table style = "width: 100%;">
+                  <tbody class = "alternating_colors">
+                    <tr>
+                    <td style = "width: 60%;">Satellite </td>
+                    <td style = "text-align: right; width: 40%;"> {{ sat_name }}</td>
+                    </tr>
+                    <tr>
+                    <td style = "width: 60%;">NORAD ID</td>
+                    <td style = "text-align: right;width: 40%;"> {{sat_norad}}</td>
+                    </tr>
+                    <tr>
+                    <td style = "width: 60%;">Latitude [deg]</td>
+                    <td style = "text-align: right;width: 40%;"><span id = "lat"></span></td>
+                    </tr>
+                    <tr>
+                    <td style = "width: 60%;">Longitude [deg]</td>
+                    <td style = "text-align: right;width: 40%;"><span id = "lon"></span></td>
+                    </tr>
+                    <td style = "width: 60%;">Altitude [km]</td>
+                    <td style = "text-align: right;width: 40%;"><span id = "alt"></span></td>
+                    </tr>
+                    </tr>
+                    <td style = "width: 60%;">Speed [km/s]</td>
+                    <td style = "text-align: right;width: 40%;"><span id = "speed"></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style = "font-weight: bold; font-size: 18px; margin-top: 6px; margin-bottom: 3px;"> Orbital Elements</div>
+                <table style = "width: 100%;">
+                  <tbody class = "alternating_colors">
+                    <tr>
+                    <td style = "width: 60%;">Semi Major Axis <i>a</i> [km]</td>
+                    <td style = "text-align: right; width: 40%;"><span id = "a"></span></td>
+                    </tr>
+                    <tr>
+                    <td style = "width: 60%;">Eccentricity <i>e</i></td>
+                    <td style = "text-align: right;width: 40%;"><span id = "e"></span></td>
+                    </tr>
+                    <tr>
+                    <td style = "width: 60%;">Inclination <i>i</i></td>
+                    <td style = "text-align: right;width: 40%;"><span id = "i"></span></td>
+                    </tr>
+                    <tr>
+                    <td style = "width: 60%;">Arg. of Periapsis <i>&omega;</i></td>
+                    <td style = "text-align: right;width: 40%;"><span id = "aop"></span></td>
+                    </tr>
+                    <tr>
+                    <td style = "width: 60%;">Right Asc. Asc. Node <i>&Omega;</i></td>
+                    <td style = "text-align: right;width: 40%;"><span id = "raan"></span></td>
+                    </tr>
+                    <tr>
+                    <td style = "width: 60%;">True Anomoly <i>&theta;</i></td>
+                    <td style = "text-align: right;width: 40%;"><span id = "ta"></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <script>
               // Call the startTracking function after the map has been created
               startTracking('{{tle1}}', '{{tle2}}', '{{tle3}}');
             </script>
-          {% endif %}
+            {% endif %}
 
-        <!-- Respond if satellite not found -->
-          {% if no_sat is defined %}
-            <div class="under_construction">
-              <span class="middle" style="color: rgb(68, 68, 68);">No satellite with this NORAD ID could be found on celestrak </span>
-            </div>
-          {% endif %}
+          <!-- Respond if satellite not found -->
+            {% if no_sat is defined %}
+              <div class="under_construction">
+                <span class="middle" style="color: rgb(68, 68, 68);">No satellite with this NORAD ID could be found on celestrak </span>
+              </div>
+            {% endif %}
 
-          {% if no_norad is defined %}
-            <div class="red_wide_block round_edges">
-                <span class="middle" style="color: rgb(68, 68, 68);"> This is not a valid NORAD ID. (Old) NORAD ID's are 5 digit integers.
-                  For example: <span style="color: green;">25544 </span> for the <span style="color: green;">International Space Station</span>.
-                  For more information on NORAD ID's see <a href="https://en.wikipedia.org/wiki/Satellite_Catalog_Number" target="_blank">here</a>.</span>
-            </div>
-          {% endif %}
+            {% if no_norad is defined %}
+              <div class="red_wide_block round_edges">
+                  <span class="middle" style="color: rgb(68, 68, 68);"> This is not a valid NORAD ID. (Old) NORAD ID's are 5 digit integers.
+                    For example: <span style="color: green;">25544 </span> for the <span style="color: green;">International Space Station</span>.
+                    For more information on NORAD ID's see <a href="https://en.wikipedia.org/wiki/Satellite_Catalog_Number" target="_blank">here</a>.</span>
+              </div>
+            {% endif %}
 
-      </div>
+        </div>
     {% endblock %}
 
 </html>

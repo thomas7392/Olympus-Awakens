@@ -17,7 +17,16 @@ from get_tle_firestore import get_tle_firestore
 
 SATELLITE_TO_NORAD = dict(icesat2 = 43613,
                           iss = 25544,
-                          hubble = 20580)
+                          hubble = 20580,
+                          SENTINEL_1A = 39634,
+                          SENTINEL_1B = 41456,
+                          SENTINEL_2A = 40697,
+                          SENTINEL_2B = 42063,
+                          SENTINEL_3A = 41335,
+                          SENTINEL_3B = 43437,
+                          SENTINEL_5P = 42969,
+                          SENTINEL_6 = 46984)
+
 MU_EARTH = 3.986004418e14
 
 def get_tle(norad, method):
@@ -98,11 +107,14 @@ def get_current_satellite_position(TLE_lines):
     geocentric = sat.at(time)
     subsat = geocentric.subpoint()
     elements = osculating_elements_of(geocentric)
+    tle_date = sat.epoch.utc_jpl()[5:]
+    print(tle_date[5:])
 
     # Store relevant info in a json
     sat_data = dict(
         longitude = subsat.longitude.degrees,
         latitude = subsat.latitude.degrees,
+        tle_date = tle_date,
         altitude = wgs84.height_of(geocentric).km,
         a = elements.semi_major_axis.km,
         e = elements.eccentricity,

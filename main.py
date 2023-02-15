@@ -66,7 +66,7 @@ def satellite_tracker():
         if user_satellite_norad!=None:
 
             # Request satellite from norad field
-            if user_satellite_norad.isdigit() and len(user_satellite_norad) == 5:
+            if user_satellite_norad.isdigit() and len(user_satellite_norad) == 5 and user_satellite_norad != "00000":
                 sat_data = get_ground_track(user_satellite_norad, IS_NORAD = True)
             else:
                 return render_template("satellite_tracker.html", no_norad = True)
@@ -91,7 +91,11 @@ def satellite_tracker():
                     polylines=[ground_track]
                     )
 
-        return render_template("satellite_tracker.html", mymap = mymap, **sat_data)
+        return render_template("satellite_tracker.html",
+                                mymap = mymap,
+                                chosen_satellite_norad = user_satellite_norad,
+                                chosen_satellite=user_satellite,
+                                **sat_data)
 
     return render_template("satellite_tracker.html")
 

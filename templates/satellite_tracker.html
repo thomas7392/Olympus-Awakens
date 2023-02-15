@@ -38,6 +38,7 @@
               // Change altitude and speed
               document.getElementById('alt').innerHTML = response.altitude.toFixed(4)
               document.getElementById('speed').innerHTML = response.speed.toFixed(6)
+              document.getElementById('tle_date').innerHTML = response.tle_date
 
               // Change the Kepler elements
               document.getElementById('a').innerHTML = response.a.toFixed(4);
@@ -54,28 +55,39 @@
     {% block content %}
       <div class = "satellite_tracker_content">
         <h1> Satellite tracker </h1>
-
           <div class="choose_satellite round_edges">
             <p> Choose your satellite: </p>
             <!-- Request satellite in a dropdown menu -->
+
             <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
               <label style = "display: inline-block;" for="satellite">Example satellites: </label>
-                <select id="mySelect" name="satellite">
-                  <option value="iss">ISS</option>
-                  <option value="icesat2">ICESAT-2</option>
-                  <option value="hubble"> Hubble</option>
+                <select id="mySelect" name="satellite" id = "satellite">
+                  <option value="iss" {% if chosen_satellite == "iss" %} selected="selected"{% endif %}>ISS</option>
+                  <option value="icesat2" {% if chosen_satellite == "icesat2" %} selected="selected" {% endif %}>ICESAT-2</option>
+                  <option value="hubble" {% if chosen_satellite == "hubble" %} selected="selected" {% endif %}> Hubble</option>
+                  <option value="SENTINEL_1A" {% if chosen_satellite == "SENTINEL_1A" %} selected="selected" {% endif %}>SENTINEL-1A</option>
+                  <option value="SENTINEL_1B" {% if chosen_satellite == "SENTINEL_1B" %} selected="selected" {% endif %}>SENTINEL-1B</option>
+                  <option value="SENTINEL_2A" {% if chosen_satellite == "SENTINEL_2A" %} selected="selected" {% endif %}>SENTINEL-2A</option>
+                  <option value="SENTINEL_2B" {% if chosen_satellite == "SENTINEL_2B" %} selected="selected" {% endif %}>SENTINEL-2B</option>
+                  <option value="SENTINEL_3A" {% if chosen_satellite == "SENTINEL_3A" %} selected="selected" {% endif %}>SENTINEL-3A</option>
+                  <option value="SENTINEL_3B" {% if chosen_satellite == "SENTINEL_3B" %} selected="selected" {% endif %}>SENTINEL-3B</option>
+                  <option value="SENTINEL_5P" {% if chosen_satellite == "SENTINEL_5P" %} selected="selected" {% endif %}>SENTINEL-5P</option>
+                  <option value="SENTINEL_6" {% if chosen_satellite == "SENTINEL_6" %} selected="selected" {% endif %}>SENTINEL-6</option>
                 </select>
               <input style = "display: inline-block;" type="submit" value="Submit">
             </form>
-
             <!-- Request satellite in an open field -->
             <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
               <label for="satellite_norad">Satellite NORAD ID: </label>
-              <input type="text" id="form2" name="satellite_norad">
+              <input type="text" id="form2" name="satellite_norad" value="{{ chosen_satellite_norad }}">
               <input type="submit" value="submit">
             </form>
           </div>
           <br>
+
+          <script type="text/javascript">
+            document.getElementById('satellite_dropdown').value = "<?php echo $_GET['satellite'];?>";
+          </script>
 
           <!-- Respond to chosen satellite -->
             {% if sat_name is defined %}
@@ -85,35 +97,46 @@
                   {{mymap.js}}
               </div>
               <div class="tracker_info round_edges">
-                <div style = "font-weight: bold; font-size: 18px; margin-top: 6px; margin-bottom: 3px;"> Info panel </div>
-                 <table style = "width: 100%;">
+                <div style = "font-weight: bold; font-size: 18px; margin-top: 10px; margin-bottom: 3px;"> Satellite info</div>
+                <table style = "width: 100%;">
                   <tbody class = "alternating_colors">
                     <tr>
-                    <td style = "width: 60%;">Satellite </td>
-                    <td style = "text-align: right; width: 40%;"> {{ sat_name }}</td>
+                      <td style = "width: 60%;">Satellite </td>
+                      <td style = "text-align: right; width: 40%;"> {{ sat_name }}</td>
                     </tr>
                     <tr>
-                    <td style = "width: 60%;">NORAD ID</td>
-                    <td style = "text-align: right;width: 40%;"> {{sat_norad}}</td>
+                      <td style = "width: 60%;">NORAD ID</td>
+                      <td style = "text-align: right;width: 40%;"> {{sat_norad}}</td>
                     </tr>
                     <tr>
-                    <td style = "width: 60%;">Latitude [deg]</td>
-                    <td style = "text-align: right;width: 40%;"><span id = "lat"></span></td>
-                    </tr>
-                    <tr>
-                    <td style = "width: 60%;">Longitude [deg]</td>
-                    <td style = "text-align: right;width: 40%;"><span id = "lon"></span></td>
-                    </tr>
-                    <td style = "width: 60%;">Altitude [km]</td>
-                    <td style = "text-align: right;width: 40%;"><span id = "alt"></span></td>
-                    </tr>
-                    </tr>
-                    <td style = "width: 60%;">Speed [km/s]</td>
-                    <td style = "text-align: right;width: 40%;"><span id = "speed"></span></td>
+                      <td style = "width: 60%;">Two-Line element date</td>
+                      <td style = "text-align: right;width: 40%;"><span id = "tle_date"></span></td>
                     </tr>
                   </tbody>
                 </table>
-                <div style = "font-weight: bold; font-size: 18px; margin-top: 6px; margin-bottom: 3px;"> Orbital Elements</div>
+
+                <div style = "font-weight: bold; font-size: 18px; margin-top: 20px; margin-bottom: 3px;"> Flight info </div>
+                <table style = "width: 100%;">
+                  <tbody class = "alternating_colors">
+                    <tr>
+                      <td style = "width: 60%;">Latitude [deg]</td>
+                      <td style = "text-align: right;width: 40%;"><span id = "lat"></span></td>
+                    </tr>
+                    <tr>
+                      <td style = "width: 60%;">Longitude [deg]</td>
+                      <td style = "text-align: right;width: 40%;"><span id = "lon"></span></td>
+                    </tr>
+                      <td style = "width: 60%;">Altitude [km]</td>
+                      <td style = "text-align: right;width: 40%;"><span id = "alt"></span></td>
+                    </tr>
+                    </tr>
+                      <td style = "width: 60%;">Speed [km/s]</td>
+                      <td style = "text-align: right;width: 40%;"><span id = "speed"></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div style = "font-weight: bold; font-size: 18px; margin-top: 20px; margin-bottom: 3px;"> Orbital Elements</div>
                 <table style = "width: 100%;">
                   <tbody class = "alternating_colors">
                     <tr>
@@ -159,10 +182,13 @@
             {% endif %}
 
             {% if no_norad is defined %}
-              <div class="red_wide_block round_edges">
-                  <span class="middle" style="color: rgb(68, 68, 68);"> This is not a valid NORAD ID. (Old) NORAD ID's are 5 digit integers.
+              <div class="red_wide_block round_edges" style = "padding-bottom: 30px;">
+                  <span class="middle" style="color: rgb(68, 68, 68);"> This is not a valid NORAD ID. (Old) NORAD ID's are 5 digit integers excluding 00000.
                     For example: <span style="color: green;">25544 </span> for the <span style="color: green;">International Space Station</span>.
-                    For more information on NORAD ID's see <a href="https://en.wikipedia.org/wiki/Satellite_Catalog_Number" target="_blank">here</a>.</span>
+                    For more information on NORAD ID's see <a href="https://en.wikipedia.org/wiki/Satellite_Catalog_Number" target="_blank">here</a>. Below shows the wikipedia
+                    page of ICESAT-2 as an example on how to find a NORAD ID.</span>
+                    <img class="image desktop-only" src="{{url_for('static', filename='images/wiki_norad_example.png')}}" width="960" height="540">
+                    <img class="image mobile-only" src="{{url_for('static', filename='images/wiki_norad_example_mobile.png')}}" width = 300>
               </div>
             {% endif %}
 

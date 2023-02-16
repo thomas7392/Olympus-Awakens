@@ -108,7 +108,6 @@ def get_current_satellite_position(TLE_lines):
     subsat = geocentric.subpoint()
     elements = osculating_elements_of(geocentric)
     tle_date = sat.epoch.utc_jpl()[5:]
-    print(tle_date[5:])
 
     # Store relevant info in a json
     sat_data = dict(

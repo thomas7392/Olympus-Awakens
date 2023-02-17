@@ -49,6 +49,26 @@
               document.getElementById('ta').innerHTML = response.ta.toFixed(4);
         }});
       }
+
+      $(function() {
+        $('#sat_form').submit(function() {
+            $("#sat_panel").hide();
+            $("#no_norad").hide();
+            $("#wrong_nord").hide();
+            $('#loading_screen').show();
+            $("#loading_screen").css("display", "flex");
+          });
+      });
+
+      $(function() {
+        $('#norad_sat_form').submit(function() {
+            $("#sat_panel").hide();
+            $("#no_norad").hide();
+            $("#wrong_norad").hide();
+            $('#loading_screen').show();
+            $("#loading_screen").css("display", "flex");
+          });
+      });
     </script>
     {% endblock %}
 
@@ -59,7 +79,7 @@
             <p> Choose your satellite: </p>
             <!-- Request satellite in a dropdown menu -->
 
-            <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+            <form id="sat_form" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
               <label style = "display: inline-block;" for="satellite">Example satellites: </label>
                 <select id="mySelect" name="satellite" id = "satellite">
                   <option value="iss" {% if chosen_satellite == "iss" %} selected="selected"{% endif %}>ISS</option>
@@ -77,7 +97,7 @@
               <input style = "display: inline-block;" type="submit" value="Submit">
             </form>
             <!-- Request satellite in an open field -->
-            <form action="/satellite_tracker" method="POST" enctype="multipart/form-data">
+            <form id="norad_sat_form" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
               <label for="satellite_norad">Satellite NORAD ID: </label>
               <input type="text" id="form2" name="satellite_norad" value="{{ chosen_satellite_norad }}">
               <input type="submit" value="submit">
@@ -90,8 +110,14 @@
           </script>
 
           <!-- Respond to chosen satellite -->
+            <div id="loading_screen" class = "satellite_panel round_edges" style="border:1px solid black;
+            display: none; height: 600px; border-color: rgb(74, 93, 112); border-width: 2px;
+            justify-content: center; align-items: center; margin-right: 100px;">
+              <div id="loader" class = "loader"></div>
+            </div>
+
             {% if sat_name is defined %}
-            <div class= "satellite_panel">
+            <div id="sat_panel" class= "satellite_panel">
               <div class = "tracker_map">
                   {{mymap.html}}
                   {{mymap.js}}
@@ -176,13 +202,13 @@
 
           <!-- Respond if satellite not found -->
             {% if no_sat is defined %}
-              <div class="under_construction">
+              <div id = "no_norad" class="under_construction">
                 <span class="middle" style="color: rgb(68, 68, 68);">No satellite with this NORAD ID could be found on celestrak </span>
               </div>
             {% endif %}
 
             {% if no_norad is defined %}
-              <div class="red_wide_block round_edges" style = "padding-bottom: 30px;">
+              <div id = "wrong_norad" class="red_wide_block round_edges" style = "padding-bottom: 30px;">
                   <span class="middle" style="color: rgb(68, 68, 68);"> This is not a valid NORAD ID. (Old) NORAD ID's are 5 digit integers excluding 00000.
                     For example: <span style="color: green;">25544 </span> for the <span style="color: green;">International Space Station</span>.
                     For more information on NORAD ID's see <a href="https://en.wikipedia.org/wiki/Satellite_Catalog_Number" target="_blank">here</a>. Below shows the wikipedia

@@ -61,11 +61,16 @@ div.round_edges{
   border-bottom-left-radius: 0.25rem;
 }
 
-div.contacts {
-  display: inline-block;
-  margin-top: 10px;
-  background-color: rgb(196, 161, 161);
+.round_edges_left{
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
 }
+
+.round_edges_right{
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
 
 span.middle
 {
@@ -233,6 +238,13 @@ div.sts_background::before {
   opacity: 0.7;
 }
 
+div.blue_background{
+  background-color: rgb(77,122,146);
+  height: calc(100vh - 80px);
+  display: flex;
+  overflow:auto;
+}
+
 p.home {
   color: black;
   margin-bottom: 40px;
@@ -298,7 +310,7 @@ div.satellite_tracker_content {
 
 .choose_satellite{
   width: 100%;
-  background-color: antiquewhite;
+  background-color: #f1f1f1;
 }
 
 .satellite_panel{
@@ -310,7 +322,7 @@ div.satellite_tracker_content {
   margin-left: 75%;
   padding: 0px;
   height: 450px;
-  background-color: antiquewhite;
+  background-color: #f1f1f1;
   padding: 0.5%;
 }
 
@@ -324,6 +336,16 @@ tbody.alternating_colors tr:nth-child(even) {background-color: #bebdbd; padding:
 tbody.alternating_colors tr:nth-child(odd) {background-color: #b5ccae; padding: 0px; margin: 0px;}
 td {padding: 0px; margin: 0px;}
 
+.loading_container{
+  border:1px dashed black;
+  display: none;
+  height: 600px;
+  border-color: #f1f1f1;
+  border-width: 2px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 100px;
+}
 
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
@@ -351,6 +373,126 @@ td {padding: 0px; margin: 0px;}
     display: none;
   }
 }
+
+/*
+================================
+Profile page specific
+================================
+*/
+
+/* div.contacts {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: rgb(196, 161, 161);
+} */
+
+#cv_opening{
+  display: flex;
+  width:60%;
+  margin: auto;
+}
+
+#opening_text{
+  opacity: 0.7;
+  color: rgb(255, 255, 255);
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  padding:0px;
+  flex: 6;
+  margin-right: 20px;
+}
+
+#personal_image{
+  flex: 3;
+}
+
+#cv {
+  display: flex;
+  width: 100%;
+}
+
+#contact {
+ flex: 1;
+ background-color: rgb(159, 175, 190);
+ height: 200px;
+}
+
+#education {
+  flex: 2;
+  margin-right: 10px;
+  background-color: rgb(159, 175, 190);
+  margin-bottom: 50px;
+ }
+
+#experience {
+  flex: 2;
+  margin-right: 10px;
+  background-color: rgb(159, 175, 190);
+  color: black;
+  margin-bottom: 50px;
+}
+
+
+/*
+================================
+Cv entry
+================================
+*/
+
+
+div.cv_entry{
+  background-color: #f1f1f1;
+  margin: 10px;
+}
+
+div.cv_entry_title_container{
+  display: flex;
+  min-height: 60px;
+}
+
+div.cv_entry_title{
+  flex: 7;
+  margin: 6px;
+  justify-content:center;
+  align-items:center;
+  display: flex;
+}
+
+.cv_entry_logo{
+  flex: 1;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  border: none;
+}
+
+.cv_entry_logo:hover{
+  background-color: rgb(74, 93, 112);
+}
+
+.cv_entry_btn{
+  flex: 1;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  border: none;
+}
+
+.cv_entry_btn:hover{
+  background-color: rgb(74, 93, 112);
+}
+
+div.cv_entry_content{
+  border-top: 1px solid black;
+  padding: 10px;
+  display: none;
+}
+
+
+
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 700px) {
@@ -415,5 +557,47 @@ td {padding: 0px; margin: 0px;}
     padding: 0px;
     background-color: rgb(196, 161, 161);
   }
+
+  #cv {
+    width: 100%;
+    display: block;
+  }
+
+  #contact {
+   background-color: rgb(159, 175, 190);
+  }
+
+  #education {
+    margin-right: 10px;
+    background-color: rgb(159, 175, 190);
+    padding-bottom: 10px;
+   }
+
+  #experience {
+    margin-right: 10px;
+    background-color: rgb(159, 175, 190);
+    color: black;
+    padding-bottom: 10px;
+  }
+
+  #cv_opening{
+    display: block;
+    width:100%;
+    margin: auto;
+  }
+
+  #opening_text{
+    opacity: 0.7;
+    color: white;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    padding:0px;
+    margin-right: 20px;
+  }
+
+  #personal_image{
+  }
+
 
 }

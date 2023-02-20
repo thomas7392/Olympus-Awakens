@@ -73,6 +73,7 @@
     {% endblock %}
 
     {% block content %}
+    <div class = "blue_background">
       <div class = "satellite_tracker_content">
         <h1> Satellite tracker </h1>
           <div class="choose_satellite round_edges">
@@ -110,9 +111,7 @@
           </script>
 
           <!-- Respond to chosen satellite -->
-            <div id="loading_screen" class = "satellite_panel round_edges" style="border:1px solid black;
-            display: none; height: 600px; border-color: rgb(74, 93, 112); border-width: 2px;
-            justify-content: center; align-items: center; margin-right: 100px;">
+            <div id="loading_screen" class = "loading_container satellite_panel round_edges">
               <div id="loader" class = "loader"></div>
             </div>
 
@@ -219,6 +218,7 @@
             {% endif %}
 
         </div>
+    </div>
     {% endblock %}
 
 </html>

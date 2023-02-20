@@ -5,40 +5,199 @@
     {% block page_title %}Thomas Goldman - Profile{% endblock %}
 
     {% block content %}
-    <div class= "sts_background">
-    <div class="content">
+    <div class= "blue_background">
 
-        <h1> Profile </h1> <br>
+        <div class="content" style = "text-align: center;">
 
-        <div class="red_wide_block round_edges">
-            <span class="middle"> Under construction </span>
+            <h1 style = "font-size: 40px;"> Who is Thomas Goldman? </h1> <br>
+
+            <div id="cv_opening">
+
+                <div id = "opening_text" class = "round_edges">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
+                    phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
+                     Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
+                     scelerisque mauris pellentesque. Id eu nisl nunc mi. Ac turpis egestas integer
+                     eget aliquet. Et pharetra pharetra massa massa ultricies mi quis hendrerit. Sed
+                     turpis tincidunt id aliquet risus feugiat in. Erat nam at lectus urna duis. Quam
+                     elementum pulvinar etiam non quam lacus suspendisse faucibus. Dictum non consectetur
+                    a erat nam at lectus urna. Lacinia quis vel eros donec ac odio. Viverra suspendisse
+                    potenti nullam ac tortor vitae purus. Massa sapien faucibus et molestie ac
+                    feugiat sed. Volutpat maecenas volutpat blandit aliquam etiam. Lacus sed turpis
+                    tincidunt id aliquet. Cum sociis natoque penatibus et.
+                </div>
+
+                <div id = "personal_image">
+                    <img src="{{url_for('static', filename='images/thomas.jpg')}}" width="200">
+                </div>
+
+            </div>
+
+            <div id="cv" style = "margin-top: 30px;">
+
+                <div id = "education" class = "round_edges">
+                    <h3 style ="margin-top: 10px; padding: 0px 10px; font-size: 25px;"> Education </h3>
+
+                    <div id = "tu_master" class = "cv_entry round_edges">
+                        <div class = "cv_entry_title_container round_edges">
+                            <button class = "cv_entry_logo round_edges_left" onclick=" window.open('https://www.tudelft.nl/en/education/programmes/masters/aerospace-engineering/msc-aerospace-engineering/master-tracks/space','_blank')">
+                                <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/tudelft.png')}}" width="30">
+                            </button>
+                            <div class = "cv_entry_title">
+                                Delft University of Technology - MSc - Aerospace Engineering
+                            </div>
+                            <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('tu_master')">
+                                <i class="fa-solid fa-plus" style ="font-size: 16px; "></i>
+                            </button>
+                        </div>
+                        <div class = "cv_entry_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
+                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
+                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
+                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                        </div>
+                    </div>
+
+                    <div id = "uva_master" class = "cv_entry round_edges">
+                        <div class = "cv_entry_title_container">
+                            <button class = "cv_entry_logo round_edges_left" onclick=" window.open('https://www.uva.nl/shared-content/programmas/en/masters/physics-and-astronomy-astronomy-and-astrophysics/astronomy-and-astrophysics.html?origin=znSrDUT%2BQ5uz6dso72fBmw','_blank')">
+                                <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/uva.png')}}" width="30">
+                            </button>
+                            <div class = "cv_entry_title">
+                                University of Amsterdam - MSc - Astronomy & Astrophysics
+                            </div>
+                            <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('uva_master')">
+                                <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
+                            </button>
+                        </div>
+                        <div class = "cv_entry_content" >
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
+                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
+                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
+                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                        </div>
+                    </div>
+
+                    <div id = "uva_bachelor" class = "cv_entry round_edges">
+                        <div class = "cv_entry_title_container">
+                            <button class = "cv_entry_logo round_edges_left" onclick=" window.open('https://www.uva.nl/programmas/bachelors/natuur--en-sterrenkunde/natuur--en-sterrenkunde.html?origin=QM8V0lIERF2uFhPGbux%2F2g','_blank')">
+                                <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/uva.png')}}" width="30">
+                            </button>
+                            <div class = "cv_entry_title">
+                                University of Amsterdam - BSc - Physics & Astronomy
+                            </div>
+                            <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('uva_bachelor')">
+                                <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
+                            </button>
+                        </div>
+                        <div class = "cv_entry_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
+                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
+                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
+                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id = "experience" class = "round_edges">
+                    <h3 style ="margin-top: 10px; padding: 0px 10px; font-size: 25px;"> Experience </h3>
+
+                    <div id = "satelligence" class = "cv_entry round_edges">
+                        <div class = "cv_entry_title_container">
+                            <button class = "cv_entry_logo round_edges_left" onclick=" window.open('https://satelligence.com/','_blank')">
+                                <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/satelligence.png')}}" width="30">
+                            </button>
+                            <div class = "cv_entry_title">
+                                Satelligence - Remote Sensing Engineer Intern
+                            </div>
+                            <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('satelligence')">
+                                <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
+                            </button>
+                        </div>
+                        <div class = "cv_entry_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
+                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
+                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
+                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                        </div>
+                    </div>
+
+                    <div id = "boswell_beta" class = "cv_entry round_edges">
+                        <div class = "cv_entry_title_container">
+                            <button class = "cv_entry_logo round_edges_left" onclick=" window.open('https://www.boswell-beta.nl/','_blank')">
+                                <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/boswell_beta.png')}}" width="30">
+                            </button>
+                            <div class = "cv_entry_title">
+                                Boswell-Beta - Teaching Assistent Math & Physics
+                            </div>
+                            <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('boswell_beta')">
+                                <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
+                            </button>
+                        </div>
+                        <div class = "cv_entry_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
+                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
+                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
+                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                        </div>
+                    </div>
+
+                    <div id = "nsa" class = "cv_entry round_edges">
+                        <div class = "cv_entry_title_container">
+                            <button class = "cv_entry_logo round_edges_left" onclick=" window.open('https://nsaweb.nl/','_blank')">
+                                <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/nsa.png')}}" width="30">
+                            </button>
+                            <div class = "cv_entry_title">
+                                Natuurwetenschappelijke Studievereniging Amsterdam - Board Member, Treasurer                        </div>
+                            <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('nsa')">
+                                <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
+                            </button>
+                        </div>
+                        <div class = "cv_entry_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
+                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
+                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
+                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="contact" class="round_edges" style = "margin-right: 10px;">
+                    <h3 style ="margin-top: 10px; padding: 0px 10px;"> Contact </h3>
+                    <table style = "width: 100%; padding: 0px 10px;">
+                        <tr>
+                        <td style = "width: 30px;"><i class="fa fa-envelope" aria-hidden="true"></i></td> <td style = "text-align: right;"> thomas1gold@hotmail.com</td>
+                        </tr>
+                        <tr>
+                        <td style = "width: 30px;"><i class="fa fa-phone" aria-hidden="true"></i></td> <td style = "text-align: right;"> +31 (0) 6 36528964</td>
+                        </tr>
+                        <tr>
+                        <td style = "width: 30px;"><i class="fa fa-home" aria-hidden="true"></i></td> <td style = "text-align: right;"> Netherlands</td>
+                        </tr>
+                    </table>
+                    <table style = "width: 100%; padding: 0px 10px;">
+                        <tr>
+                        <td style = "text-align: center; font-size: 50px;">
+                            <a target = "_blank" href="https://www.linkedin.com/in/tcgoldman"><img src="{{url_for('static', filename='images/linkedin.png')}}" width="50" height="50"></a>
+                        </td>
+                        <td style = "text-align: center; font-size: 50px;"><a target = "_blank" href="https://github.com/thomas7392/">
+                            <img src="{{url_for('static', filename='images/github.png')}}" width="50" height="50"></a>
+                        </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
         </div>
-
-        <div class="contacts round_edges">
-            <h3 style ="margin-top: 10px; padding: 0px 10px;"> Contact </h3>
-            <table style = "width: 100%; padding: 0px 10px;">
-                <tr>
-                <td style = "width: 30px;"><i class="fa fa-envelope" aria-hidden="true"></i></td> <td style = "text-align: right;"> thomas1gold@hotmail.com</td>
-                </tr>
-                <tr>
-                <td style = "width: 30px;"><i class="fa fa-phone" aria-hidden="true"></i></td> <td style = "text-align: right;"> +31 (0) 6 36528964</td>
-                </tr>
-                <tr>
-                <td style = "width: 30px;"><i class="fa fa-home" aria-hidden="true"></i></td> <td style = "text-align: right;"> Netherlands</td>
-                </tr>
-            </table>
-            <table style = "width: 100%; padding: 0px 10px;">
-                <tr>
-                <td style = "text-align: center; font-size: 50px;">
-                    <a target = "_blank" href="https://www.linkedin.com/in/tcgoldman"><img src="{{url_for('static', filename='images/linkedin.png')}}" width="50" height="50"></a>
-                </td>
-                <td style = "text-align: center; font-size: 50px;"><a target = "_blank" href="https://github.com/thomas7392/">
-                    <img src="{{url_for('static', filename='images/github.png')}}" width="50" height="50"></a>
-                </td>
-                </tr>
-            </table>
-        </div>
-
 
     </div>
     {% endblock %}

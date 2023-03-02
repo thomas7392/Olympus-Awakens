@@ -31,11 +31,9 @@
                 <div id = "personal_image">
                     <img src="{{url_for('static', filename='images/thomas.jpg')}}" width="200">
                 </div>
-
             </div>
 
             <div id="cv" style = "margin-top: 30px;">
-
                 <div id = "education" class = "round_edges">
                     <h3 style ="margin-top: 10px; padding: 0px 10px; font-size: 25px;"> Education </h3>
 
@@ -45,18 +43,36 @@
                                 <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/tudelft.png')}}" width="30">
                             </button>
                             <div class = "cv_entry_title">
-                                Delft University of Technology - MSc - Aerospace Engineering
+                                Delft University of Technology <br> MSc Aerospace Engineering<br> 2021-present
                             </div>
                             <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('tu_master')">
                                 <i class="fa-solid fa-plus" style ="font-size: 16px; "></i>
                             </button>
                         </div>
                         <div class = "cv_entry_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
-                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
-                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
-                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                            <div>
+                                <ul class = "cv_info">
+                                    <li>Enrolled in the Space Flight track where I focus on <b>spacecraft flight dynamics</b>. I am currently working on
+                                        my thesis and expect to graduate in October 2023
+                                    </li><br>
+                                    <li>Thesis: Hamiltonian neural networks applied in space flight applications
+                                    </li>
+                                </lu><br>
+                            </div>
+                            <b>Relevant courses</b>
+                            <div class = "tags">
+                                <span class = "course ">Rocket Motion</span>
+                                <span class = "course ">Numerical Astrodynamics</span>
+                                <span class = "course ">Propagation and Optimization</span>
+                                <span class = "course ">Astrodynamics</span>
+                                <span class = "course ">Re-entry Systems</span>
+                                <span class = "course ">Satellite Orbit Determination</span>
+                                <span class = "course ">Planetary Sciences 1 & 2</span>
+                                <span class = "course ">Space Systems Engineering</span>
+                                <span class = "course ">Spacecraft Attitude Dynamics and Control</span>
+                                <span class = "course ">Machine Learning in Astrodynamics</span>
+                                <span class = "course ">Scientific Programming in C++</span>
+                            </div>
                         </div>
                     </div>
 
@@ -66,18 +82,32 @@
                                 <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/uva.png')}}" width="30">
                             </button>
                             <div class = "cv_entry_title">
-                                University of Amsterdam - MSc - Astronomy & Astrophysics
+                                University of Amsterdam <br> MSc Astronomy & Astrophysics <br> 2020-present
                             </div>
                             <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('uva_master')">
                                 <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
                             </button>
                         </div>
                         <div class = "cv_entry_content" >
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
-                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
-                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
-                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                            <div>
+                                <ul class = "cv_info">
+                                    <li>Completed 54 ECTS (in the study year 2020/2021) out of the 120 ECTS (2 year degree) before
+                                        transferring to a different program at the Delft University of Technology.
+                                    </li>
+                                </lu>
+                            </div> <br>
+                            <b>Relevant courses</b>
+                            <div class = "tags">
+                                <span class = "course ">Statistics</span>
+                                <span class = "course ">Space Instrumentation for High Energy Astrophysics</span>
+                                <span class = "course ">Radio Astronomy</span>
+                                <span class = "course ">Machine Learning</span>
+                                <span class = "course ">Computational Finance</span>
+                                <span class = "course ">Accretion Disks</span>
+                                <span class = "course ">Structure and Evolution of Stars</span>
+                                <span class = "course ">Atmospheres and Radiative Transfer</span>
+                                <span class = "course ">Quantum for Business and Society</span>
+                            </div>
                         </div>
                     </div>
 
@@ -87,18 +117,19 @@
                                 <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/uva.png')}}" width="30">
                             </button>
                             <div class = "cv_entry_title">
-                                University of Amsterdam - BSc - Physics & Astronomy
+                                University of Amsterdam <br> BSc Physics & Astronomy <br> 2016-2020 <br> Graduated with honours (gpa: 7.8/10)
                             </div>
                             <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('uva_bachelor')">
                                 <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
                             </button>
                         </div>
                         <div class = "cv_entry_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
-                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
-                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
-                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                            <ul class ="cv_info">
+                                <li>I received an honours certificate rewarded to students participating in additional courses (30 EC)
+                                </li> <br>
+                                <li>Bachelor thesis: A planetary companion interpretation of pulsar timing variations. (Grade: 9/10).
+                                </li>
+                            </lu>
                         </div>
                     </div>
 
@@ -113,18 +144,29 @@
                                 <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/satelligence.png')}}" width="30">
                             </button>
                             <div class = "cv_entry_title">
-                                Satelligence - Remote Sensing Engineer Intern
+                                Satelligence <br> Remote Sensing Engineer Intern <br> June 2022 - September 2022
                             </div>
                             <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('satelligence')">
                                 <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
                             </button>
                         </div>
                         <div class = "cv_entry_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
-                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
-                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
-                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                            <div>
+                                <ul class = "cv_info">
+                                    <li>I worked in the R&D department on a project to test whether the land and vegetation height data from
+                                        the ICESAT-2 satellite can be used to infer above ground biomass density.
+                                    </li>
+                                    <li>
+                                        Contributed to operational biomass-estimating software library in Python
+                                    </li>
+                                </ul>
+                            </div>
+                            <b>Skills</b>
+                            <div class = "tags">
+                                <span class = "skill ">Python</span>
+                                <span class = "skill ">Git</span>
+                                <span class = "skill ">Remote Sensing</span>
+                            </div>
                         </div>
                     </div>
 
@@ -134,18 +176,28 @@
                                 <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/boswell_beta.png')}}" width="30">
                             </button>
                             <div class = "cv_entry_title">
-                                Boswell-Beta - Teaching Assistent Math & Physics
+                                Boswell-Beta <br> Teaching Assistent Math & Physics <br> 2018-2021
                             </div>
                             <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('boswell_beta')">
                                 <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
                             </button>
                         </div>
                         <div class = "cv_entry_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
-                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
-                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
-                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                            <div>
+                                <ul class = "cv_info">
+                                    <li>Assisting high-school courses for adults covering the full program on mathematics and physics for
+                                        national and international students.
+                                    </li>
+                                    <li>
+                                        Supervising exams.
+                                    </li>
+                                </ul>
+                            </div>
+                            <b>Skills</b>
+                            <div class = "tags">
+                                <span class = "skill ">Teaching</span>
+                                <span class = "skill ">Communication</span>
+                            </div>
                         </div>
                     </div>
 
@@ -155,22 +207,41 @@
                                 <img style = "vertical-align: middle;" src="{{url_for('static', filename='images/nsa.png')}}" width="30">
                             </button>
                             <div class = "cv_entry_title">
-                                Natuurwetenschappelijke Studievereniging Amsterdam - Board Member, Treasurer                        </div>
+                                Natuurwetenschappelijke Studievereniging Amsterdam <br> Board Member, Treasurer <br> February 2019 - February 2020
+                            </div>
                             <button class = "cv_entry_btn round_edges_right" onclick="openCVentry('nsa')">
                                 <i class="fa-solid fa-plus" style ="font-size: 16px;"></i>
                             </button>
                         </div>
                         <div class = "cv_entry_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam
-                            phasellus vestibulum lorem sed. Cras tincidunt lobortis feugiat vivamus at augue.
-                            Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Aenean vel elit
-                            scelerisque mauris pellentesque. Id eu nisl nunc mi.
+                            <div>
+                            <ul class = "cv_info">
+                                <li>The NSA is the physics and mathematics study association for students in Amsterdam organizing
+                                    educational and leisure activities
+                                </li>
+                                <li>
+                                    Responsible for managing all financial matters of the association: Creating, managing and executing
+                                    the budget (yearly revenue ~100k) and bookkeeping.
+                                </li>
+                                <li>
+                                    Additionally: member of Audit Committee (after board position), chair of committee organizing Dutch
+                                    University Physics Olympiad, treasurer in Symposium Committee, chair of Anniversary Committee.
+                                </li>
+                            </ul>
+                            </div>
+                            <b>Skills</b>
+                            <div class = "tags">
+                                <span class = "skill ">Finance</span>
+                                <span class = "skill ">Communication</span>
+                                <span class = "skill ">Gnucash</span>
+                                <span class = "skill ">Presenting</span>
+                                <span class = "skill ">Managing</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="contact" class="round_edges" style = "margin-right: 10px;">
+                <div id="contact" class="round_edges">
                     <h3 style ="margin-top: 10px; padding: 0px 10px;"> Contact </h3>
                     <table style = "width: 100%; padding: 0px 10px;">
                         <tr>

@@ -218,17 +218,19 @@ div.home_content {
   color: black;
 }
 
-div.sts_background{
+
+/* div.sts_background{
   position: relative;
   height: calc(100vh - 80px);
   width: 100%;
   display: flex;
   justify-content: center;
-}
+} */
 
-div.sts_background::before {
+/* div.sts_background::before {
   content: "";
-  background-image: url("/static/images/space-shuttle-launch-hd-1.jpg");  background-size: cover;
+  background-image: url("/static/images/space-shuttle-launch-hd-1.jpg");
+  background-size: cover;
   background-position: bottom 80% center;
   position: absolute;
   top: 0px;
@@ -236,6 +238,31 @@ div.sts_background::before {
   bottom: 0px;
   left: 0px;
   opacity: 0.7;
+} */
+
+div.sts_background{
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 80px);
+}
+
+div.sts_background::before {
+  content: "";
+  display: block;
+  background-image: url("/static/images/space-shuttle-launch-hd-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.7;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-position: bottom 90% center;
 }
 
 div.blue_background{
@@ -257,8 +284,9 @@ h1.home {
   color: white;
 }
 
+
 .btn-group button {
-  background-color: rgb(201, 167, 167); /* Green background */
+  background-color: rgb(201, 167, 167); /* red background */
   color: white; /* White text */
   cursor: pointer; /* Pointer/hand icon */
   border-top-left-radius: 0.25rem;
@@ -324,6 +352,7 @@ div.satellite_tracker_content {
   height: 450px;
   background-color: #f1f1f1;
   padding: 0.5%;
+  height: auto;
 }
 
 .tracker_map{
@@ -407,6 +436,8 @@ Profile page specific
   flex: 3;
 }
 
+
+
 #cv {
   display: flex;
   width: 100%;
@@ -443,7 +474,9 @@ Cv entry
 
 div.cv_entry{
   background-color: #f1f1f1;
-  margin: 10px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 div.cv_entry_title_container{
@@ -457,6 +490,8 @@ div.cv_entry_title{
   justify-content:center;
   align-items:center;
   display: flex;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .cv_entry_logo{
@@ -479,6 +514,7 @@ div.cv_entry_title{
   justify-content:center;
   align-items:center;
   border: none;
+  transition: 0.4s;
 }
 
 .cv_entry_btn:hover{
@@ -487,11 +523,49 @@ div.cv_entry_title{
 
 div.cv_entry_content{
   border-top: 1px solid black;
-  padding: 10px;
+  padding: 0px;
   display: none;
+  /* transition-duration: 200ms;
+  transition-timing-function: ease-in; */
 }
 
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+}
 
+.course {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-decoration: none; /* added line */
+}
+
+.skill {
+  background-color: #77b653;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-decoration: none; /* added line */
+}
+
+.cv_info {
+  margin: 0px;
+  margin-top: 10px;
+  padding-left: 30px;
+  padding-bottom: 10px;
+}
+
+.cv_info li {
+  text-align: left;
+}
 
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
@@ -565,6 +639,7 @@ div.cv_entry_content{
 
   #contact {
    background-color: rgb(159, 175, 190);
+   margin-bottom: 100px;
   }
 
   #education {
@@ -595,9 +670,5 @@ div.cv_entry_content{
     padding:0px;
     margin-right: 20px;
   }
-
-  #personal_image{
-  }
-
 
 }

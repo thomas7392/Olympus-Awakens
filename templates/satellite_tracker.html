@@ -117,12 +117,16 @@
 
             {% if sat_name is defined %}
             <div id="sat_panel" class= "satellite_panel">
+
               <div class = "tracker_map">
                   {{mymap.html}}
                   {{mymap.js}}
               </div>
+
               <div class="tracker_info round_edges">
+
                 <div style = "font-weight: bold; font-size: 18px; margin-top: 10px; margin-bottom: 3px;"> Satellite info</div>
+
                 <table style = "width: 100%;">
                   <tbody class = "alternating_colors">
                     <tr>
@@ -161,7 +165,7 @@
                   </tbody>
                 </table>
 
-                <div style = "font-weight: bold; font-size: 18px; margin-top: 20px; margin-bottom: 3px;"> Orbital Elements</div>
+                <div style = "font-weight: bold; font-size: 18px; margin-top: 20px; margin-bottom: 3px;"> Osculating Orbital Elements</div>
                 <table style = "width: 100%;">
                   <tbody class = "alternating_colors">
                     <tr>

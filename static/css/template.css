@@ -43,6 +43,7 @@ div.content {
   padding-left: 15%;
   padding-right: 15%;
   position:relative;
+  padding-bottom: 30px;
 }
 
 div.red_wide_block {
@@ -390,11 +391,11 @@ td {padding: 0px;
   margin: 0px;}
 
 tbody.alternating_colors td:nth-child(1) {
-  width: 70%;
+  width: 60%;
 }
 
 tbody.alternating_colors td:nth-child(2) {
-  width: 30%;
+  width: 40%;
   text-align: right;
 }
 
@@ -707,7 +708,6 @@ div.cv_entry_content{
 
   #contact {
    background-color: rgb(159, 175, 190);
-   margin-bottom: 100px;
   }
 
   #education {

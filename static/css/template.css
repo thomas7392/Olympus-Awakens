@@ -265,11 +265,34 @@ div.sts_background::before {
   background-position: bottom 90% center;
 }
 
-div.blue_background{
+/* div.blue_background{
   background-color: rgb(77,122,146);
   height: calc(100vh - 80px);
   display: flex;
-  overflow:auto;
+  overflow: auto;
+} */
+
+div.blue_backgroundd{
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 80px);
+}
+
+div.blue_background::before {
+  content: "";
+  display: block;
+  background-color: rgb(77,122,146);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 p.home {
@@ -361,19 +384,34 @@ div.satellite_tracker_content {
   float: left;
 }
 
-tbody.alternating_colors tr:nth-child(even) {background-color: #bebdbd; padding: 0px; margin: 0px;}
-tbody.alternating_colors tr:nth-child(odd) {background-color: #b5ccae; padding: 0px; margin: 0px;}
-td {padding: 0px; margin: 0px;}
+tbody.alternating_colors tr:nth-child(even) {width: 100%; background-color: #bebdbd; padding: 0px; margin: 0px;}
+tbody.alternating_colors tr:nth-child(odd) {width: 100%; background-color: #b5ccae; padding: 0px; margin: 0px;}
+td {padding: 0px;
+  margin: 0px;}
+
+tbody.alternating_colors td:nth-child(1) {
+  width: 70%;
+}
+
+tbody.alternating_colors td:nth-child(2) {
+  width: 30%;
+  text-align: right;
+}
+
+tbody.alternating_colors table {
+  width: 100%;
+  box-sizing: border-box;
+}
 
 .loading_container{
-  border:1px dashed black;
+  border: 1px dashed black;
+  width: 100%;
   display: none;
   height: 600px;
   border-color: #f1f1f1;
   border-width: 2px;
   justify-content: center;
   align-items: center;
-  margin-right: 100px;
 }
 
 .loader {
@@ -422,7 +460,7 @@ Profile page specific
 }
 
 #opening_text{
-  opacity: 0.7;
+  opacity: 0.9;
   color: rgb(255, 255, 255);
   margin: auto;
   width: 50%;
@@ -430,6 +468,7 @@ Profile page specific
   padding:0px;
   flex: 6;
   margin-right: 20px;
+  padding-bottom: 30px;
 }
 
 #personal_image{
@@ -580,9 +619,38 @@ div.cv_entry_content{
   div.content {width:80%; padding-left: 10%; padding-right: 10%; margin: 0;}
 
   div.satellite_tracker_content {width:94%; margin-left: 3%; margin-right: 3%; margin-top: 10%; padding: 0px; font-size: 22px;}
-  .choose_satellite{width: 100%; margin-top: 10%; padding: 0px;}
-  .tracker_info{width:100%; height: 100%; margin-bottom: 5%; margin-top: 640px; margin-left: 0px; padding: 0.5%;
+  .choose_satellite{width: 100%; margin-top: 10%; padding: 0px; box-sizing: border-box;
   }
+
+  /* #special + br {
+    display: block;
+    content: "";
+  } */
+
+  #special:after {
+    content: "\a"; /* \a is the escape sequence for a line break */
+    display: block; /* display as block element */
+  }
+
+#norad_sat_form{
+  margin-top: 10px;
+}
+
+#sat_form{
+  margin-top: 10px;
+}
+
+  .tracker_info{width:100%;
+                height: 100%;
+                margin-bottom: 5%;
+                margin-top: 640px;
+                margin-left: 0px;
+                margin-right: 0px;
+                padding-right: 10px;
+                padding-left: 10px;
+                box-sizing: border-box;
+  }
+
   .tracker_map{width:100%; height: 600px;}
   .satellite_panel{width: 100%; height: 130%;}
 
@@ -620,8 +688,8 @@ div.cv_entry_content{
 
   .choose_satellite{
     width: 100%;
-    background-color: antiquewhite;
-    padding: 0px 2%;
+    background-color: #f1f1f1;
+    padding: 3px 3px;
   }
 
   div.contacts {
@@ -662,13 +730,15 @@ div.cv_entry_content{
   }
 
   #opening_text{
-    opacity: 0.7;
+    opacity: 0.9;
     color: white;
     margin: auto;
     width: 100%;
     text-align: center;
     padding:0px;
     margin-right: 20px;
+    margin-bottom: 30px;
   }
+
 
 }

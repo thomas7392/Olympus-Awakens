@@ -80,9 +80,11 @@
             <p> Choose your satellite: </p>
             <!-- Request satellite in a dropdown menu -->
 
+
             <form id="sat_form" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
-              <label style = "display: inline-block;" for="satellite">Example satellites: </label>
-                <select id="mySelect" name="satellite" id = "satellite">
+              <label id = "special" for="satellite"> <span style="display: inline-block;">Example satellites:</span></label>
+
+                <select id="mySelect" name="satellite" id = "satellite", style = "width: 150px;">
                   <option value="iss" {% if chosen_satellite == "iss" %} selected="selected"{% endif %}>ISS</option>
                   <option value="icesat2" {% if chosen_satellite == "icesat2" %} selected="selected" {% endif %}>ICESAT-2</option>
                   <option value="hubble" {% if chosen_satellite == "hubble" %} selected="selected" {% endif %}> Hubble</option>
@@ -95,7 +97,7 @@
                   <option value="SENTINEL_5P" {% if chosen_satellite == "SENTINEL_5P" %} selected="selected" {% endif %}>SENTINEL-5P</option>
                   <option value="SENTINEL_6" {% if chosen_satellite == "SENTINEL_6" %} selected="selected" {% endif %}>SENTINEL-6</option>
                 </select>
-              <input style = "display: inline-block;" type="submit" value="Submit">
+              <input style = "display: inline-block;" type="submit" value="Submit"><span id="special2"></span>
             </form>
             <!-- Request satellite in an open field -->
             <form id="norad_sat_form" action="/satellite_tracker" method="POST" enctype="multipart/form-data">
@@ -111,7 +113,7 @@
           </script>
 
           <!-- Respond to chosen satellite -->
-            <div id="loading_screen" class = "loading_container satellite_panel round_edges">
+            <div id="loading_screen" class = "loading_container round_edges">
               <div id="loader" class = "loader"></div>
             </div>
 
@@ -128,18 +130,18 @@
                 <div style = "font-weight: bold; font-size: 18px; margin-top: 10px; margin-bottom: 3px;"> Satellite info</div>
 
                 <table style = "width: 100%;">
-                  <tbody class = "alternating_colors">
+                  <tbody class = "alternating_colors" style = "width: 100%;">
                     <tr>
-                      <td style = "width: 60%;">Satellite </td>
-                      <td style = "text-align: right; width: 40%;"> {{ sat_name }}</td>
+                      <td >Satellite </td>
+                      <td > {{ sat_name }}</td>
                     </tr>
                     <tr>
-                      <td style = "width: 60%;">NORAD ID</td>
-                      <td style = "text-align: right;width: 40%;"> {{sat_norad}}</td>
+                      <td >NORAD ID</td>
+                      <td > {{sat_norad}}</td>
                     </tr>
                     <tr>
-                      <td style = "width: 60%;">Two-Line element date</td>
-                      <td style = "text-align: right;width: 40%;"><span id = "tle_date"></span></td>
+                      <td>Two-Line element date</td>
+                      <td><span id = "tle_date"></span></td>
                     </tr>
                   </tbody>
                 </table>

@@ -43,6 +43,7 @@ div.content {
   padding-left: 15%;
   padding-right: 15%;
   position:relative;
+  padding-bottom: 30px;
 }
 
 div.red_wide_block {
@@ -384,17 +385,27 @@ div.satellite_tracker_content {
   float: left;
 }
 
-tbody.alternating_colors tr:nth-child(even) {width: 100%; background-color: #bebdbd; padding: 0px; margin: 0px;}
-tbody.alternating_colors tr:nth-child(odd) {width: 100%; background-color: #b5ccae; padding: 0px; margin: 0px;}
-td {padding: 0px;
-  margin: 0px;}
+table.sat_info{
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-radius: 10px;
+}
+
+tbody.alternating_colors tr:nth-child(even) {width: 100%; background-color: #ffffff; padding: 0px; margin: 0px;}
+tbody.alternating_colors tr:nth-child(odd) {width: 100%; background-color: rgb(144, 180, 199); padding: 0px; margin: 0px;}
+tbody.alternating_colors  td {padding: 0px;
+  margin: 0px;
+  border-left: 1px solid #000;}
+
+tbody.alternating_colors  td:first-child { border-left: none; }
 
 tbody.alternating_colors td:nth-child(1) {
-  width: 70%;
+  width: 60%;
 }
 
 tbody.alternating_colors td:nth-child(2) {
-  width: 30%;
+  width: 40%;
   text-align: right;
 }
 
@@ -707,7 +718,6 @@ div.cv_entry_content{
 
   #contact {
    background-color: rgb(159, 175, 190);
-   margin-bottom: 100px;
   }
 
   #education {

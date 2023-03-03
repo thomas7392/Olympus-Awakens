@@ -79,8 +79,8 @@ def satellite_tracker():
 
         # Create map
         mymap = Map(identifier="view-side",
-                    lat=0,
-                    lng=0,
+                    lat=sat_data['sat_lat'][0],
+                    lng=sat_data['sat_lon'][0],
                     zoom = 2,
                     streetview_control=False,
                     style = "width:100%; height:100%;",

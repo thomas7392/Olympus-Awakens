@@ -28,3 +28,23 @@ function closeNav() {
   document.getElementById("move_content_for_nav").style.width = "100%";
   document.getElementById("myHeader").style.width = "100%";
 }
+
+function openCVentry (entry_name) {
+  var targetdiv = document.getElementById(entry_name).lastElementChild;
+  var button_1 = document.getElementById(entry_name).querySelector("div:first-of-type button:nth-child(1)");
+  var button_2 = document.getElementById(entry_name).querySelector("div:first-of-type button:last-of-type");
+
+  if (targetdiv.style.display === 'block') {
+    targetdiv.style.display = 'none';
+    button_1.style.borderBottomLeftRadius = "0.25rem";
+    button_2.style.borderBottomRightRadius = "0.25rem";
+    button_2.innerHTML = "<i class='fa-solid fa-plus' style ='font-size: 16px; '></i>";
+  } else {
+    targetdiv.style.display = 'block';
+    button_1.style.borderBottomLeftRadius = "0";
+    button_2.style.borderBottomRightRadius = "0";
+    button_2.innerHTML = "<i class='fa-solid fa-minus' style ='font-size: 16px; '></i>";
+  }
+}
+
+

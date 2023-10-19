@@ -32,7 +32,7 @@ MU_EARTH = 3.986004418e14
 def get_tle(norad, method):
 
     if method == "local":
-        return get_tle_firestore(norad)
+        return get_tle_local(norad)
 
     if method == "firestore":
         return get_tle_firestore(norad)

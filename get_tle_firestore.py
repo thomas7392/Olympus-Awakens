@@ -46,7 +46,7 @@ def query_tle(norad):
     '''
 
     # Download TLE of last known position
-    URL = f'https://celestrak.org/NORAD/elements/gp.php?CATNR={norad}FORMAT=TLE'
+    URL = f'https://celestrak.org/NORAD/elements/gp.php?CATNR={norad}&FORMAT=TLE'
     TLE_string = urlopen(URL).read().decode('utf-8')
     TLE_lines = TLE_string.strip().splitlines()
 

@@ -15,6 +15,21 @@ p {
   margin: 0;
 }
 
+.chess-board {margin: auto;
+              border-spacing: 0;
+              border: 5px solid rgb(63, 45, 22);
+              margin-top: 40px;
+              border-collapse: collapse;
+              text-align: center;
+              display: flex;
+              background-color: #836e4e;}
+.chess-board td {padding: 0px; width: 53px; height: 53px;font-size: 30px;}
+.chess-board th {padding: 1px; width: 53px; height: 53px; font-size: 20px;}
+.chess-board .light { background: #d8dddd; }
+.chess-board .dark { background: #2a552b; }
+.chess-board .light:hover{background: #979494; color: red;}
+.chess-board .dark:hover{background: #528552; color: red}
+
 /*
 ================================
 General divs
@@ -752,3 +767,4 @@ div.cv_entry_content{
 
 
 }
+

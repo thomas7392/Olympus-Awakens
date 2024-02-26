@@ -30,6 +30,12 @@ def home():
 def profile():
     return render_template("profile.html")
 
+
+@app.route("/chess")
+def chess():
+    return render_template("chess.html")
+
+
 @app.route("/update_satellite_position", methods = ['POST', 'GET'])
 def update_satellite_position():
 
